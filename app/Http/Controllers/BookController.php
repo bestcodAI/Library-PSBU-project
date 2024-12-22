@@ -31,7 +31,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        $categories =  DB::table('categories')->get();  
+        $categories =  DB::table('categories')->get();
         $category_languages = DB::table('category_langs')->get();
         return view('books.add',['categories' => $categories, 'category_languages' => $category_languages]);
     }
@@ -49,7 +49,7 @@ class BookController extends Controller
             'title' => 'required',
             'slug' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            
+
         ]);
 
         $data =  [
@@ -65,13 +65,13 @@ class BookController extends Controller
 
         if (!empty($request->image)) {
             $file =$request->file('image');
-            $extension = $file->getClientOriginalExtension(); 
+            $extension = $file->getClientOriginalExtension();
             $filename = hash('gost',(time().'.' . $extension));
             $file->move(public_path('uploads/books/'), $filename);
             $data['image']= $filename;
         }
 
-        
+
         DB::table('books')->insert($data);
 
         return admin_redirect('books')->with('success', 'book added');
@@ -85,7 +85,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+       // this is show all all in books
     }
 
     /**
@@ -94,9 +94,16 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
-        //
+        $book = DB::table('books')
+        ->where('id', $id)
+        ->select('*')->first();
+        // get categories
+        $categories = DB::table('categories')->get();
+        $category_languages = DB::table('category_langs')->get();
+
+        return view('books.edit',['book' => $book,'categories' => $categories,'category_languages' => $category_languages]);
     }
 
     /**
@@ -106,9 +113,44 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request,$id)
     {
-        //
+
+        // dd($request->image);
+        
+        $request->validate([
+            'code' => 'required',
+            'title' => 'required',
+            'slug' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+        $data =  [
+            'code' => $request->code,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'author' => $request->author_name,
+            'author_date' => $request->author_date,
+            'category_lang_id' => $request->category_lang_id,
+            'category_id' => $request->category,
+            'details' => clear_tag($request->description),
+        ];
+
+        if (!empty($request->image)) {
+            $file =$request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('gost',(time().'.' . $extension));
+            $file->move(public_path('uploads/books/'), $filename);
+            $data['image']= $filename;
+        }
+
+         DB::table('books')
+            ->where('id', $id)
+            ->update($data);
+
+        return admin_redirect('group_book/books')->with('success', 'Book updated');
+
     }
 
     /**
@@ -117,21 +159,38 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Book $book, $id)
     {
-        //
+    
     }
 
-    public function print_barcodes()
+    public function print_barcodes(Request $request)
     {
+
+        if(!empty($request->form_type)) {
+            dd($request);
+        }
+
+        $books =  DB::table('books')->select('title','code')->get();
+
         
-       $book = DB::table('users')->first();
-        return view('books.barcodes', ['book' => $book]);
+
+        return view('books.barcodes',['books' => $books]);
+    }
+
+    public function filters($filters) {
+
+        $filter =  DB::table('books')
+        ->where('code','LIKE','%'.$filters.'%')
+        ->orWhere('title','LIKE','%'.$filters.'%')
+        ->select('id','title','code')
+        ->get();
+
+        return response()->json(['filter' => $filter]);
     }
 
     public function import()
     {
-        
        $book = DB::table('users')->first();
         return view('books.barcodes', ['book' => $book]);
     }

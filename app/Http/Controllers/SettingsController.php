@@ -12,11 +12,9 @@ class SettingsController extends Controller
     public function index() 
     {
         $settings = DB::table('settings')->where('setting_id', 1)->first();
-        $currencies = DB::table('currencies')->get();
-        $warehouses = DB::table('warehouses')->get();
-        return view('settings.index', ['setting' => $settings, 
-        'currencies' => $currencies,
-        'warehouses' => $warehouses,
+        // $currencies = DB::table('currencies')->get();
+        // $warehouses = DB::table('warehouses')->get();
+        return view('settings.index', ['setting' => $settings
     ]);
     }
 

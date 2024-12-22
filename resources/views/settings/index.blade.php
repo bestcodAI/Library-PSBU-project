@@ -41,7 +41,7 @@
                             <label for="site_name">Site name</label>
                             <input type="text" class="form-control" name="site_name" value="{{ $setting->site_name }}" id="site_name" placeholder="Site name">
                           </div>
-                          <div class="form-group">
+                          {{-- <div class="form-group">
                             <label>Warehouse</label>
                             <select class="form-control select2" style="width: 100%;"  name="warehouse" id="warehouse">
                               @foreach($warehouses as $warehouse)
@@ -49,8 +49,8 @@
                               @endforeach
   
                             </select>
-                          </div>
-                          <div class="form-group">
+                          </div> --}}
+                          {{-- <div class="form-group">
                             <label>Warehouse</label>
                             <select class="form-control select2" style="width: 100%;"  name="account" id="warehouse">
                               
@@ -58,7 +58,7 @@
                            
   
                             </select>
-                          </div>
+                          </div> --}}
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
@@ -74,15 +74,15 @@
                           </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label>Currency</label>
                         <select class="form-control select2" style="width: 100%;"  name="currency" id="currency">
                           @foreach($currencies as $currency)
                           <option value="{{ $currency->code }}" {{ $setting->default_currency  == $currency->code ? 'selected="selected"' :'' }} >{{ $currency->name }}</option>
                           @endforeach
-                          {{-- <option value="english" {{ $setting->language  == 'english'? 'selected="selected"' :'' }}>English</option> --}}
+                          <option value="english" {{ $setting->language  == 'english'? 'selected="selected"' :'' }}>English</option>
                         </select>
-                      </div>
+                      </div> --}}
                         <div class="form-group">
                             <label for="">language</label>
                             <input type="text" class="form-control" value="" placeholder="Lanuage">

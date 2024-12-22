@@ -67,8 +67,8 @@
           @endif
           {{-- end product --}}
           {{-- Books --}}
-          <li class="nav-item {{ request()->is('admin/books*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('admin/books*') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->is('admin/group_book*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/group_book*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 {{__('admin.books')}}
@@ -78,25 +78,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ admin_url('books') }}" class="nav-link {{ request()->is('admin/books') ? 'active' : '' }}">
+                <a href="{{ admin_url('group_book/books') }}" class="nav-link {{ request()->is('admin/group_book/books') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.book_lists')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{admin_url('books/create')}}" class="nav-link {{ request()->is('admin/books/create') ? 'active' : '' }}">
+                <a href="{{admin_url('group_book/books/create')}}" class="nav-link {{ request()->is('admin/group_book/books/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.add_book')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ admin_url('books/import') }}" class="nav-link {{ request()->is('admin/books/import') ? 'active' : '' }}">
+                <a href="{{ admin_url('group_book/import') }}" class="nav-link {{ request()->is('admin/group_book/import') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.import_books')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ admin_url('books/print_barcodes') }}" class="nav-link {{ request()->is('admin/books/print_barcodes') ? 'active' : '' }}">
+                <a href="{{ admin_url('group_book/print_barcodes') }}" class="nav-link {{ request()->is('admin/group_book/print_barcodes') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.print_barcode/label')}}</p>
                 </a>

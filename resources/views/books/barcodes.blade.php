@@ -33,29 +33,52 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{ admin_url('books') }}" method="POST" enctype="multipart/form-data">
+              <form id="quickForm" action="{{ admin_url('group_book/print_barcodes') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
+                <input type="hidden" name="form_type" value="1">
                 <div class="card-body">
                     <div class="container">
                         <div class="row no-print">
                           <div class="col-md-4">
+
                             <div class="form-group">
-                                <label for="code">{{__('admin.code')}}</label>
-                                <input type="text" name="code" class="form-control" id="code"  placeholder="{{__('admin.enter_book_code')}}">
+                              <label>{{__('admin.code')}}</label>
+                              <select class="form-control select2bs4" id="code" style="width: 100%;">
+                                <option disabled selected>{{__('admin.select_code')}}</option>
+                                @foreach($books as $book)
+                                <option value="{{$book->title}}">{{$book->title}} ( {{$book->code}} )</option>
+                                @endforeach
+                    
+                              </select>
                             </div>
+                                        {{-- <div class="form-group view">
+                                <label for="code">{{__('admin.code')}}</label>
+                                <input type="text" name="code" class="form-control add_books" id="code"  placeholder="{{__('admin.enter_book_code')}}">
+                                <div style="background: #d6d9d2; margin: 1px; border-radius: 2px;" id="suggesstion-box"></div>
+                            </div> --}}
                             
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
+                              <label>{{__('admin.title')}}</label>
+                              <select class="form-control select2bs4" id="title" style="width: 100%;">
+                                <option disabled selected>{{__('admin.select_code')}}</option>
+                                @foreach($books as $book)
+                                <option>{{$book->title}} ( {{$book->code}} )</option>
+                                @endforeach
+                    
+                              </select>
+                            </div>
+                          {{-- <div class="form-group">
                                 <label for="name">{{__('admin.title')}}</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="{{__('admin.enter_book_title')}}">
-                              </div>
+                                <input type="text" name="title" class="form-control add_books" id="title" placeholder="{{__('admin.enter_book_title')}}">
+                              </div> --}}
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="slug">{{__('admin.slug')}}</label>
-                                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{__('admin.enter_book_slug')}}">
+                                <input type="text" name="slug" class="form-control add_books" id="slug" placeholder="{{__('admin.enter_book_slug')}}">
                             </div>
                             
                         </div>
@@ -66,17 +89,20 @@
                               <th>Books Name(Book barcode)</th>
                               <th>Quantity</th>
                               <th>Variant</th>
+                              <th width="20px"><i class="fas fa-trash"></i></th>
                             </thead>
                             <tbody>
                               <tr>
                                 <td>Book 1(829929292)</td>
                                 <td class="col-2"><input type="text" class="form-control text-center" value="2"></td>
                                 <td class="col-4">testing</td>
+                                <td><a href="#" class="text-danger" title="Remove"><i class="fas fa-times"></i></a></td>
                               </tr>
                                <tr>
                                 <td>Book 2</td>
                                 <td class="col-2"><input type="text" class="form-control text-center" value="2"></td>
                                 <td class="col-4">testing</td>
+                                <td> <a href="#" class="text-danger" title="Remove"><i class="fas fa-times"></i></a></td>
                               </tr>
                             </tbody>
                         </table>
@@ -263,5 +289,19 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+<script>
+  $(document).ready(function() {
+    $('#code').change(function() {
+      let code = $(this).val();
+      alert(code);
+    })
+  });
+
+  function loadItem() {
+    alert('item');
+  }
+</script>
 
 @endsection

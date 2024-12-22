@@ -79,10 +79,13 @@ Route::middleware('auth')->group(function () {
         });
 
         // books
-        Route::prefix('/books')->group(function() {
-            Route::resource('/', BookController::class);
+        Route::prefix('/group_book')->group(function() {
+            Route::resource('/books', BookController::class);
             Route::get('/print_barcodes', [BookController::class, 'print_barcodes']);
+            Route::post('/print_barcodes', [BookController::class, 'print_barcodes']);
             Route::get('/import', [BookController::class, 'import']);
+            Route::get('/import', [BookController::class, 'import']);
+            Route::get('/filters/{val}', [BookController::class, 'filters']);
         });
 
         Route::prefix('/attendances')->group(function() {

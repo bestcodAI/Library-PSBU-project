@@ -52,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="date">{{__('admin.author_date')}}</label>
-                                <input type="date" name="author_date" class="form-control date">
+                                <input type="date" name="author_date" class="form-control" value="{{ date("Y-m-d")}}">
                             </div>
                         </div>
                         <div class="col-md-6">

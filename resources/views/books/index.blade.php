@@ -53,13 +53,14 @@
                     <td>{{ $book->slug }}</td>
                     <td>{{ $book->category_name }}</td>
                     <td>{{ $book->cate_lang_name }}</td>
+                    
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $book->id}}" data-toggle="modal" data-target="#modal-lg">view</button>
-                        <a href="{{ admin_url('categories/'. $book->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form  action="{{ admin_url('categories/'. $book->id) }}" method="post">
+                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $book->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></button>
+                        <a href="{{ admin_url('group_book/books/'. $book->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                        <form  action="{{ admin_url('group_book/books/'. $book->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                   </tr>
