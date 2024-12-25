@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BorrowerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
@@ -87,6 +88,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/import', [BookController::class, 'import']);
             Route::get('/filters/{val}', [BookController::class, 'filters']);
         });
+
+        // borrower book
+        // Route::prefix('/brorrowers')->group(function() {
+
+        // });
+
+        Route::resource('/borrowers', BorrowerController::class);
 
         Route::prefix('/attendances')->group(function() {
             Route::resource('/', AttandentController::class);

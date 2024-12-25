@@ -7,19 +7,17 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category</h1>
+            <h1>{{__('admin.book_borrowing')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item"><a href="#">{{__('admin.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('admin.category')}}</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-
 
     <!-- Main content -->
     <section class="content">
@@ -46,20 +44,19 @@
                   
                   </thead>
                   <tbody>
-                    @foreach($categories as $category)
+                    @foreach($borrowings as $borrowing)
                   <tr class="text-center">
-                    <td><img width="50px" src="{{ $category->image ? asset('uploads/category/'. $category->image) : asset('images/no_image.png');  }}"></td>
-                    <td>{{  $category->code }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->slug }}</td>
-                    <td>{{ $category->parent_name }}</td>
+                    <td>{{  $borrowing->reference_no }}</td>
+                    <td>{{ $borrowing->book_name }}</td>
+                    <td>{{ $borrowing->student_name }}</td>
+                    <td>{{ $borrowing->quantity }}</td>
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $category->id}}" data-toggle="modal" data-target="#modal-lg">view</button>
-                        <a href="{{ admin_url('categories/'. $category->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form  action="{{ admin_url('categories/'. $category->id) }}" method="post">
+                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $category->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></button>
+                        <a href="{{ admin_url('categories/'. $borrowing->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                        <form  action="{{ admin_url('categories/'. $borrowing->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                   </tr>

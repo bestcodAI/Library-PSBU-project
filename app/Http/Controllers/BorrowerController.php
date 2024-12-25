@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Borrower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BorrowerController extends Controller
 {
@@ -14,7 +15,13 @@ class BorrowerController extends Controller
      */
     public function index()
     {
-        //
+        $books = DB::table('book_borrowers')
+        ->join('books', 'book_borrowers.book_id','=','books.id')
+        ->join('students', 'book_borrowers.student_id', '=','students.id')
+        ->orderBy('book_borrowers.id','desc')
+        ->select('book_borrowers.*','books.title as book_name', DB::raw("CONCAT('students.first_name', '', 'students.last_name') as student_name"))
+        ->get();
+        return view('borrow.index', ['borrowings' => $books]);
     }
 
     /**
@@ -24,7 +31,9 @@ class BorrowerController extends Controller
      */
     public function create()
     {
-        //
+        $books =  DB::table('books')->get();
+        $students = DB::table('students')->get();
+        return view('borrow.add', ['books' => $books, 'students' => $students]);
     }
 
     /**
@@ -35,7 +44,37 @@ class BorrowerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = $request->validate([
+            'book_id' => 'required',
+            'title' => 'required',
+            'slug' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+        $data =  [
+            'code' => $request->code,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'author' => $request->author_name,
+            'author_date' => $request->author_date,
+            'category_lang_id' => $request->category_lang_id,
+            'category_id' => $request->category,
+            'details' => clear_tag($request->description),
+        ];
+
+        if (!empty($request->image)) {
+            $file =$request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('gost',(time().'.' . $extension));
+            $file->move(public_path('uploads/books/'), $filename);
+            $data['image']= $filename;
+        }
+
+
+        DB::table('books')->insert($data);
+
+        return admin_redirect('books')->with('success', 'book added');
     }
 
     /**
@@ -57,7 +96,7 @@ class BorrowerController extends Controller
      */
     public function edit(Borrower $borrower)
     {
-        //
+        return view('borrow.edit');
     }
 
     /**
@@ -80,6 +119,6 @@ class BorrowerController extends Controller
      */
     public function destroy(Borrower $borrower)
     {
-        //
+        
     }
 }

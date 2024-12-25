@@ -105,8 +105,8 @@
           </li>
           {{-- end Books --}}
           {{-- book borrowing--}}
-          <li class="nav-item {{ request()->is('admin/attendances*') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('admin/attendances*') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->is('admin/borrowers*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/borrowers*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 {{__('admin.book_borrowing')}}
@@ -115,13 +115,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ admin_url('attendances') }}" class="nav-link {{ request()->is('admin/attendances') ? 'active' : '' }}">
+                <a href="{{ admin_url('borrowers') }}" class="nav-link {{ request()->is('admin/borrowers') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.book_borrowing_list')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{admin_url('books/create')}}" class="nav-link {{ request()->is('admin/attendances/create') ? 'active' : '' }}">
+                <a href="{{admin_url('borrowers/create')}}" class="nav-link {{ request()->is('admin/borrowers/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{ __('admin.add_book_borrowing') }}</p>
                 </a>
