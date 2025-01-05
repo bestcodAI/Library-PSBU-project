@@ -4,7 +4,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/c68fjm5e9c14/public_html/
+    - export DEPLOYPATH=/home/c68fjm5e9c14/public_html/lms.psbu.cloud/
     - /bin/cp -R .vscode $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R css $DEPLOYPATH
