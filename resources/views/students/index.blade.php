@@ -29,7 +29,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('categories/create') }}">{{__('admin.add_student')}}</a>
+                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('students/create') }}">{{__('admin.add_student')}}</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

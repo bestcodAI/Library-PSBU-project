@@ -1,7 +1,7 @@
 {
-    "name": "X Bussiness",
-    "short_name": "X Bussiness",
-    "start_url": "http://127.0.0.1:8000/",
+    "name": "LMS PSBU",
+    "short_name": "LMS PSBU",
+    "start_url": "http://lms.psbu.cloud/",
     "display": "standalone",
     "scope" : "/",
     "background_color": "#000000",

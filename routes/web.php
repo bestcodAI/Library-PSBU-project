@@ -19,6 +19,7 @@ use App\Http\Controllers\AttandentController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProvinceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,6 +126,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/', [SettingsController::class, 'store'])->name('settings.store');
             Route::resource('/categories', CategoryController::class);
             Route::resource('/brands', BrandController::class);
+            Route::resource('/provinces', ProvinceController::class);
             Route::resource('/category_langauges', CategoryLanguageController::class);
         });
          

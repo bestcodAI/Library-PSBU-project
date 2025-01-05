@@ -69,7 +69,7 @@
                                 <label for="father_phone">{{__('admin.father_phone')}}</label>
                                 <input type="text" name="father_phone" class="form-control" id="father_phone" placeholder="{{__('admin.enter_father_phone')}}">
                             </div>
-                            
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -88,7 +88,7 @@
                                 <label for="email">{{__('admin.email')}}</label>
                                 <input type="email" name="email" class="form-control" id="email" placeholder="{{__('admin.enter_email')}}">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>{{__('admin.province')}}</label>
                                 <select class="form-control select2" name="provice_id" id="province_id" style="width: 100%;">
@@ -111,7 +111,7 @@
                           </div>
                         </div>
                         </div>
-                      
+
                         <div class="col-md-12">
                             <div class="card card-outline card-info">
                               <div class="card-header">
@@ -124,7 +124,7 @@
                                 <textarea id="summernote" name="description"></textarea>
                               </div>
                               <div class="card-footer">
-                    
+
                               </div>
                             </div>
                           </div>
@@ -152,7 +152,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
- 
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->

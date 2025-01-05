@@ -259,18 +259,18 @@
                   <p>{{__('admin.add_student')}}</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ admin_url('peoples/borrows') }}" class="nav-link {{ request()->is('admin/borrows') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.borrower_lists')}}</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> --}}
+              {{-- <li class="nav-item">
                 <a href="{{ admin_url('peoples/borrows/create') }}" class="nav-link {{ request()->is('admin/borrows/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.add_borrower')}}</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <li class="nav-item {{ request()->is('admin/settings*') ? 'menu-open' : '' }}">
@@ -301,7 +301,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                <a href="{{ admin_url('settings/provinces')}}" class="nav-link {{ request()->is('admin/settings/provinces') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.add_biller')}}</p>
                 </a>
