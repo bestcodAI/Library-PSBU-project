@@ -127,9 +127,9 @@ class BookController extends Controller
         ]);
 
         $data =  [
-            'code' => $request->code,
+            'code' => strlower(str_replace(' ','_',$request->code)),
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => strlower(str_replace(' ','_',$request->slug)),
             'author' => $request->author_name,
             'author_date' => $request->author_date,
             'category_lang_id' => $request->category_lang_id,
@@ -143,6 +143,11 @@ class BookController extends Controller
             $filename = hash('gost',(time().'.' . $extension));
             $file->move(public_path('uploads/books/'), $filename);
             $data['image']= $filename;
+
+            $old_img = DB::table('books')->where(['id' => $id])->first()->image;
+            if($old_img) {
+                unlink(public_path('uploads/books/'. $old_img));
+            }
         }
 
          DB::table('books')
@@ -159,9 +164,16 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book, $id)
+    public function destroy($id)
     {
-    
+        $old_img =  DB::table('books')->where(['id' => $id])->first()->image;
+
+        DB::table('books')->where(['id' => $id])->delete();
+
+        if($old_img) {
+            unlink(public_path('uploads/books/'. $old_img));
+        }
+        return admin_redirect('group_book/books')->with('success', __('admin.book_deleted'));
     }
 
     public function print_barcodes(Request $request)

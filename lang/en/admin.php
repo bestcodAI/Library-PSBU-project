@@ -60,4 +60,5 @@ return [
     'shop_settings'             => 'Shop settings',
     'sliders'                   => 'Sliders',
     'banners'                   => 'Banners', 
+    'in_required'                => 'Please fill in the information below. The field labels marked with * are required input fields.',
 ];

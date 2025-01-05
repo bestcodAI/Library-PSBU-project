@@ -23,6 +23,7 @@ class CategoryController extends Controller
         return view('category.index', ['categories' => $categories]);
     }
 
+
     
     public function create()
     {
@@ -50,7 +51,7 @@ class CategoryController extends Controller
         ];
 
         if (!empty($request->image)) {
-            $old_img = DB::table('categories')->first()->image;
+            $old_img = DB::table('categories')->where(['id' => $id])->first()->image;
             $file =$request->file('image');
             $extension = $file->getClientOriginalExtension(); 
             $filename = hash('gost',(time().'.' . $extension));
@@ -70,6 +71,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $data = DB::table('categories')->where(['id' => $id])->first();
+        print_r('សួស្ដី');
         return response()->json($data);
     }
 

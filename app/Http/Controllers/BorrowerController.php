@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Borrower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class BorrowerController extends Controller
 {
@@ -33,7 +34,16 @@ class BorrowerController extends Controller
     {
         $books =  DB::table('books')->get();
         $students = DB::table('students')->get();
-        return view('borrow.add', ['books' => $books, 'students' => $students]);
+        return view('borrow.add', ['students' => $students]);
+    }
+
+    public function get_data($term) 
+    {
+        $data = DB::table('books')
+        ->where('code', 'LIKE', "%{$term}%") 
+        ->orWhere('title', 'LIKE', "%{$term}%")
+        ->get();
+        return response()->json([$data]);
     }
 
     /**
@@ -45,15 +55,14 @@ class BorrowerController extends Controller
     public function store(Request $request)
     {
         $valid = $request->validate([
-            'book_id' => 'required',
-            'title' => 'required',
-            'slug' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_id' => 'required',
 
         ]);
 
+        $reference_code = Str::random(40);
+
         $data =  [
-            'code' => $request->code,
+            'reference_code' => $request->code,
             'title' => $request->title,
             'slug' => $request->slug,
             'author' => $request->author_name,
@@ -94,8 +103,10 @@ class BorrowerController extends Controller
      * @param  \App\Models\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function edit(Borrower $borrower)
+    public function edit($id)
     {
+        $borrow = DB::table('book_borrowers')->where(['id' => $id])->first();
+
         return view('borrow.edit');
     }
 
@@ -119,6 +130,6 @@ class BorrowerController extends Controller
      */
     public function destroy(Borrower $borrower)
     {
-        
+
     }
 }

@@ -95,6 +95,7 @@ Route::middleware('auth')->group(function () {
         // });
 
         Route::resource('/borrowers', BorrowerController::class);
+        Route::get('/borrowers/get_data/{term}',[BorrowerController::class,'get_data']);
 
         Route::prefix('/attendances')->group(function() {
             Route::resource('/', AttandentController::class);

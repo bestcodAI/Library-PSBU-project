@@ -226,7 +226,7 @@
               </li>
             </ul>
           </li> --}}
-          <li class="nav-item {{ request()->is('admin/users*') ? 'menu-open' : '' }}">
+          <li class="nav-item {{ request()->is('admin/peoples*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -236,25 +236,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ admin_url('peoples/users') }}" class="nav-link {{ request()->is('admin/users') ? 'active' : '' }}">
+                <a href="{{ admin_url('peoples/users') }}" class="nav-link {{ request()->is('admin/peoples/users') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.user_lists')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ admin_url('peoples/users/create') }}" class="nav-link {{ request()->is('admin/users/create') ? 'active' : '' }}">
+                <a href="{{ admin_url('peoples/users/create') }}" class="nav-link {{ request()->is('admin/peoples/users/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.add_user')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ admin_url('peoples/students') }}" class="nav-link {{ request()->is('admin/students') ? 'active' : '' }}">
+                <a href="{{ admin_url('peoples/students') }}" class="nav-link {{ request()->is('admin/peoples/students') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.student_lists')}}</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ admin_url('peoples/students/create') }}" class="nav-link {{ request()->is('admin/students/create') ? 'active' : '' }}">
+                <a href="{{ admin_url('peoples/students/create') }}" class="nav-link {{ request()->is('admin/peoples/students/create') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.add_student')}}</p>
                 </a>

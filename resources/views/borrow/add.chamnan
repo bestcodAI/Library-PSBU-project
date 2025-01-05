@@ -65,7 +65,7 @@
                             <div class="form-group  m-2">
                               <div class="input-group">
                               <span class="input-group-text" id="books"><i class="fas fa-barcode" style="font-size: 30px;"></i></span>
-                              <input type="text" name="books" id="books" class="form-control form-control-lg border-none" placeholder="search book here" aria-describedby="books">
+                              <input type="text" name="books" id="add_item" class="form-control form-control-lg border-none" placeholder="search book here" aria-describedby="books">
                             </div>
                             </div>
                           </div>
@@ -166,4 +166,106 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-@stop
+{{-- <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> --}}
+
+<script>
+
+  // get local storage
+  if(localStorage.getItem('sbooks')) {
+    var data = localStorage.getItem('sbooks');
+  }
+
+  $(document).ready(function() {
+
+    $("#add_item").autocomplete({
+            source: function (request, response) {
+                let term = request.term;
+                $.ajax({
+                    type: 'GET',
+                    url: `<?= admin_url('borrowers/get_data/${term}'); ?>`,
+                    dataType: "json",
+                    success: function (data) {
+                        $(this).removeClass('ui-autocomplete-loading');
+                        response(data);
+                    }
+                });
+            },
+            minLength: 1,
+            autoFocus: false,
+            delay: 250,
+            response: function (event, ui) {
+                if ($(this).val().length >= 16 && ui.content[0].id == 0) {
+                  
+                    $(this).removeClass('ui-autocomplete-loading');
+                    $(this).removeClass('ui-autocomplete-loading');
+                    $(this).val('');
+                }
+                else if (ui.content.length == 1 && ui.content[0].id != 0) {
+                    ui.item = ui.content[0];
+                    $(this).data('ui-autocomplete')._trigger('select', 'autocompleteselect', ui);
+                    $(this).autocomplete('close');
+                    $(this).removeClass('ui-autocomplete-loading');
+                }
+                else if (ui.content.length == 1 && ui.content[0].id == 0) {
+                   
+                    $(this).removeClass('ui-autocomplete-loading');
+                    $(this).val('');
+                }
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                if (ui.item.id !== 0) {
+                    var row = add_invoice_item(ui.item);
+                    // var row = ui.item;
+                    // alert(JSON.stringify(row));
+                    if (row)
+                        $(this).val('');
+                } else {
+                     alert('language');
+                }
+            }
+        });
+
+        // add item to local storage
+        
+        function add_item(item) {
+          if (count == 1) {
+              slitems = {};
+              if ($('#bstudent').val()) {
+                  $('#bstudent').select2('readonly', true);
+              } else {
+
+                aler('select_student_above')
+                  // bootbox.alert(lang.select_above);
+                  item = null;
+                  return;
+              }
+          }
+          if (item == null) return;
+
+          var item_id = site.settings.item_addition == 1 ? item.item_id : item.id;
+          if (slitems[item_id]) {
+              var new_qty = parseFloat(slitems[item_id].row.qty) + 1;
+              slitems[item_id].row.base_quantity = new_qty;
+              if (slitems[item_id].row.unit != slitems[item_id].row.base_unit) {
+                  $.each(slitems[item_id].units, function () {
+                      if (this.id == slitems[item_id].row.unit) {
+                          slitems[item_id].row.base_quantity = unitToBaseQty(new_qty, this);
+                      }
+                  });
+              }
+              slitems[item_id].row.qty = new_qty;
+          } else {
+              slitems[item_id] = item;
+          }
+          slitems[item_id].order = new Date().getTime();
+          localStorage.setItem('slitems', JSON.stringify(slitems));
+          loadItems();
+          return true;
+      }
+
+
+  });
+</script>
+
+@endsection

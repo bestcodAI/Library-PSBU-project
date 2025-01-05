@@ -36,7 +36,35 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid = $request->validate([
+            'student_id' => 'required',
+        ]);
+
+        $reference_code = Str::random(40);
+
+        $data =  [
+            'reference_code' => $request->code,
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'author' => $request->author_name,
+            'author_date' => $request->author_date,
+            'category_lang_id' => $request->category_lang_id,
+            'category_id' => $request->category,
+            'details' => clear_tag($request->description),
+        ];
+
+        if (!empty($request->image)) {
+            $file =$request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('gost',(time().'.' . $extension));
+            $file->move(public_path('uploads/books/'), $filename);
+            $data['image']= $filename;
+        }
+
+
+        DB::table('books')->insert($data);
+
+        return admin_redirect('books')->with('success', 'book added');
     }
 
     /**

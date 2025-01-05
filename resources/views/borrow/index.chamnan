@@ -46,7 +46,7 @@
                   <tbody>
                     @foreach($borrowings as $borrowing)
                   <tr class="text-center">
-                    <td>{{  $borrowing->reference_no }}</td>
+                    <td>{{ $borrowing->reference_no }}</td>
                     <td>{{ $borrowing->book_name }}</td>
                     <td>{{ $borrowing->student_name }}</td>
                     <td>{{ $borrowing->quantity }}</td>
