@@ -51,15 +51,11 @@ class CategoryController extends Controller
         ];
 
         if (!empty($request->image)) {
-            $old_img = DB::table('categories')->where(['id' => $id])->first()->image;
             $file =$request->file('image');
             $extension = $file->getClientOriginalExtension(); 
             $filename = hash('gost',(time().'.' . $extension));
             $file->move(public_path('uploads/category/'), $filename);
             $data['image']= $filename;
-            if($old_img) {
-                unlink(public_path('uploads/category/'. $old_img));
-            }
         }
         
         DB::table('categories')->insert($data);
