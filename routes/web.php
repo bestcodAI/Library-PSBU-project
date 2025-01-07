@@ -20,6 +20,8 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProvinceController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MySendEmail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +41,12 @@ Route::get('/testing', function(){
  return 'testing';
 });
 
+Route::get('/testroute', function() {
+    $name = "Funny Coder";
+    // The email sending is done using the to method on the Mail facade
+    Mail::to('chou.chamnan.kh@gmail.com')->send(new MySendEmail($name));
+});
+
 
 
 Route::get('/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
@@ -49,7 +57,7 @@ Route::controller(FacebookController::class)->group(function(){
     Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','admin')->group(function () {
 
     Route::prefix(prefix_url().'/admin')->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');

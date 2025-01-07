@@ -72,6 +72,7 @@
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">Developer</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
+      <span>{{__('admin.login_device')}}: {{Auth::user()->os_login}} ,({{__('admin.login_browser')}}: {{Auth::user()->brower_login}})</span>
       <b>Version</b> 3.2.0
     </div>
   </footer>
@@ -79,8 +80,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-{{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
 <!-- Bootstrap -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
@@ -197,7 +196,7 @@
     });
     Toast.fire({
         icon: 'success',
-        title: '<b>{{ session("success") }}</b>',
+        title: '{{ session("success") }}',
       })
     })</script> 
   @elseif(session('info')) 

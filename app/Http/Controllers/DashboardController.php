@@ -16,6 +16,7 @@ class DashboardController extends Controller
         Session::put("locale",$locale_current);
     
     }
+
     public function dashboard()
     {
         // $locale_current = request()->cookie("language");

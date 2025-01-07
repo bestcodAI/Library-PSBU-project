@@ -42,14 +42,29 @@ class RegisteredUserController extends Controller
             'activate_code' => str()->random(40),
             'password' => Hash::make($request->password),
         ]);
-        dd($user);
+
         event(new Registered($user));
 
-        // if(Auth::login($user, ['activated' => 1])) {
-        //     return redirect(RouteServiceProvider::HOME);
-        // }else {
-        //     return redirect('login')->with('error', 'please active your account');
-        // }
-        return redirect('login')->with('error', 'please active your account');
+        return admin_redirect('login')->with('error', 'please active your account');
+    }
+
+    public function activateUser($activationCode) 
+    {
+        try {
+            $user = app(User::class)->where('activation_code', $activationCode)->first();
+            if (!$user) {
+                return "The code does not exist for any user in our system.";
+            }
+            $user->status          = 1;
+            $user->activation_code = null;
+            $user->save();
+            auth()->login($user);
+        } catch (\Exception $exception) {
+            logger()->error($exception);
+
+            return "Whoops! something went wrong.";
+        }
+
+        return redirect()->to('/home');
     }
 }

@@ -30,6 +30,10 @@ class User extends Authenticatable
         'is_agrree',
         'activate_code',
         'activated',
+        'last_login_at',
+        'last_login_ip',
+        'brower_login',
+        'os_login'
     ];
 
     /**
