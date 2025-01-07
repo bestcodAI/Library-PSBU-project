@@ -53,20 +53,18 @@ class CategoryLanguageController extends Controller
         ];
 
         if (!empty($request->image)) {
-            $old_img = DB::table('category_langs')->first()->image;
+        
             $file =$request->file('image');
             $extension = $file->getClientOriginalExtension(); 
             $filename = hash('gost',(time().'.' . $extension));
             $file->move(public_path('uploads/category_lang/'), $filename);
             $data['image']= $filename;
-            if($old_img) {
-                unlink(public_path('uploads/category_lang/'. $old_img));
-            }
+           
         }
         
         DB::table('category_langs')->insert($data);
 
-        return admin_redirect('settings/category_langauges')->with('success', 'category language added');
+        return admin_redirect('settings/category_langauges')->with('success', __('category_language_added'));
     }
 
     /**

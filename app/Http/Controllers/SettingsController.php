@@ -30,9 +30,9 @@ class SettingsController extends Controller
         $data = [
             'site_name' => $request->input('site_name'),
             'language' => $request->input('language'),
-            'default_warehouse' => $request->input('warehouse'),
+            // 'default_warehouse' => $request->input('warehouse'),
             // 'accounting_method' => $request->input('account'),
-            'default_currency' => $request->input('currency'),
+            // 'default_currency' => $request->input('currency'),
             // 'default_tax_rate' => $request->input('default_tax_rat'),
         ];
         
