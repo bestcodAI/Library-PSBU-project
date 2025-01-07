@@ -125,13 +125,13 @@ class CategoryController extends Controller
             return admin_redirect('categories')->with('error', 'Can not delete this catetory');
         }
 
+        DB::table('categories')->where(['id' => $id])->delete();
+
         $delete_image = DB::table('categories')->where(['id' => $id])->first();
 
         if($delete_image->image != null ) {
             unlink(public_path('uploads/category/'.$delete_image->image));
         }
-
-        DB::table('categories')->where(['id' => $id])->delete();
         return admin_redirect('settings/categories')->with('success', 'Category deleted!');
     }
 }
