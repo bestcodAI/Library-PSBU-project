@@ -19,30 +19,3 @@ function getCookie(name) {
     }
     return null;
 }
-
-
-
-$(function () {
-
-    $(document).on('click', '.view-modal', function () {
-        var id = $(this).attr('data-id');
-        var html = '';
-
-        $.ajax({
-            url: site.url + '/' + id,
-            dataType: "json",
-            type: "get",
-            async: true,
-            success: function (data) {
-
-                html += `
-                 <img src="${site.asset + '/' + data.image}" alt="Something" height="" width="">
-                `;
-                $('.modal-body').empty().append(html);
-
-            },
-        });
-
-    });
-})
-

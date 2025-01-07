@@ -78,5 +78,64 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <script>
+
+    var site =  {url: "<?= admin_url('settings/categories/') ?>" , asset: "<?= asset('uploads/category/') ?>" }
+
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"');
+    }
+
+    $(function () {
+
+    $(document).on('click', '.view-modal', function () {
+        var id = $(this).attr('data-id');
+        // alert(id);
+        var html = '';
+
+        // alert(site.url);
+
+        $.ajax({
+            url: site.url + '/' + id,
+            dataType: "json",
+            type: "get",
+            async: true,
+            success: function (data) {
+              // alert(JSON.stringify(data));
+                html += `
+                <div class="row mb-4">
+                  <div class="col-md-4">
+                    <img src="${data.image ? site.asset + '/' + data.image : site.asset + '/no_image.png'}" alt="${data.name}" width="100%">
+                  </div>
+                  <div class="col-md-8">
+                  
+                    <table class="table table-bordered table-strip">
+                      <tbody>
+                        <tr>
+                          <td>{{__('admin.code')}}</td>
+                          <td>${data.code}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.name')}}</td>
+                          <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.description')}}</td>
+                          <td>${ htmlEntities(data.description) }</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                `;
+                $('.modal-body').empty().append(html);
+
+            },
+        });
+
+    });
+});
+  </script>
   @include('components.modal-lg')
 @stop

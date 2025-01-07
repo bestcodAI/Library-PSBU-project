@@ -15,7 +15,6 @@ class CategoryLanguageController extends Controller
     public function index()
     {
         $cate_lang =  DB::table('category_langs')->orderBy('id', 'desc')->get();
-        // dd($cate_lang);
         return view('category-language.index', ['cate_lang' => $cate_lang]);
     }
 
@@ -78,9 +77,8 @@ class CategoryLanguageController extends Controller
      */
     public function show($id)
     {
-        $data = DB::table('c')->where(['id' => $id])->first();
-        db($data);
-        return json_encode($data);
+        $cate_lang =  DB::table('category_langs')->where('id' , $id)->first();
+        return response()->json($cate_lang);
     }
 
     /**

@@ -71,7 +71,6 @@ class CategoryController extends Controller
     public function show($id)
     {
         $data = DB::table('categories')->where(['id' => $id])->first();
-        print_r('សួស្ដី');
         return response()->json($data);
     }
 

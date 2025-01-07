@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Category</h1>
+            <h1>{{__('admin.edit_province')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Category</li>
+              <li class="breadcrumb-item"><a href="#">{{__('admin.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('admin.edit')}}</li>
             </ol>
           </div>
         </div>
@@ -32,47 +32,46 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{ admin_url('categories/'. $category->id) }}" method="POST">
+              <form id="quickForm" action="{{ admin_url('province/'. $province->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="code">code</label>
-                                <input type="text" name="code" value="{{ $category->code }}" class="form-control" id="code"  placeholder="Enter category code">
+                                <label for="code">{{__('admin.zip_code')}}</label>
+                                <input type="text" name="zip_code" value="{{ $province->zip_code }}" class="form-control" id="zip_code"  placeholder="{{__('enter_province_zip_code')}}">
                             </div>
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" value="{{ $category->name }}" class="form-control" id="name" placeholder="Enter cateory name">
+                            <label for="exampleInputFile">{{__('admin.image')}}</label>
+                            <div class="input-group">
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image" name="image">
+                                <label class="custom-file-label" for="image">{{__('admin.choose_file')}}</label>
                               </div>
+                            </div>
+                          </div>
+                            
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="slug">slug</label>
-                                <input type="text" name="slug" value="{{ $category->slug }}" class="form-control" id="slug" placeholder="Enter Product code">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Parent</label>
-                                <select class="form-control select2" name="parent" id="parent" style="width: 100%;">
-                                  <option>Select Parent cateory</option>
-                                  @foreach($categories as $cate)
-                                  <option value="{{ $cate->id }}" {{$category->parent_id == $cate->id ? 'selected' : ''}}>{{ $cate->name }}</option>
-                                  @endforeach
-                                </select>
-                            </div>
+                          <div class="form-group">
+                                <label for="name">{{__('admin.name')}}</label>
+                                <input type="text" name="name" value="{{ $province->name }}" class="form-control" id="name" placeholder="{{__('enter_province_name')}}">
+                          </div>
+                          <div class="form-group">
+                              <img src="{{ asset('uploads/province/'.$province->image); }}"  width="200px" height="200px">
+                          </div>
                         </div>
                         <div class="col-md-12">
                             <div class="card card-outline card-info">
                               <div class="card-header">
                                 <h3 class="card-title">
-                                  Description
+                                  {{__('admin.description')}}
                                 </h3>
                               </div>
                               <!-- /.card-header -->
                               <div class="card-body">
-                                <textarea id="summernote" name="description">{{ decode_html($category->description) }}</textarea>
+                                <textarea id="summernote" name="description">{{ decode_html($province->details) }}</textarea>
                               </div>
                               <div class="card-footer">
                     
@@ -84,7 +83,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">{{__('admin.submit')}}</button>
                 </div>
               </form>
             </div>

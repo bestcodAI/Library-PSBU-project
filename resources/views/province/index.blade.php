@@ -37,24 +37,22 @@
                     <th>{{__('admin.image')}}</th>
                     <th>{{__('admin.zipcode')}}</th>
                     <th>{{__('admin.name')}}</th>
-                    <th>{{__('admin.slug')}}</th>
-                    <th>{{__('admin.parent')}}</th>
+                    <th>{{__('admin.description')}}</th>
                     <th>{{__('admin.action')}}</th>
-                  </tr>
-                  
+                  </tr> 
                   </thead>
                   <tbody>
-                    @foreach($provinces as $privince)
+                    @foreach($provinces as $province)
                   <tr class="text-center">
-                    <td><img width="50px" src="{{ $province->image ? asset('uploads/category/'. $category->image) : asset('images/no_image.png');  }}"></td>
-                    <td>{{  $province->code }}</td>
+                    <td><img width="50px" src="{{ $province->image ? asset('uploads/province/'. $province->image) : asset('images/no_image.png');  }}"></td>
+                    <td>{{ $province->zip_code }}</td>
                     <td>{{ $province->name }}</td>
-                    <td>{{ $province->slug }}</td>
+                    <td><?= decode_html($province->details) ?></td>
                     {{-- <td>{{ $province->parent_name }}</td> --}}
                     <td>
                         <button class="btn btn-info btn-sm view-modal" data-id="{{ $province->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fa fa-eye"></i></button>
-                        <a href="{{ admin_url('settings/categories/'. $province->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                        <form  action="{{ admin_url('settings/categories/'. $province->id) }}" method="post">
+                        <a href="{{ admin_url('settings/provinces/'. $province->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                        <form  action="{{ admin_url('settings/provinces/'. $province->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
@@ -78,5 +76,66 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <script>
+
+    var site =  {url: "<?= admin_url('settings/provinces/') ?>" , asset: "<?= asset('uploads/province/') ?>" }
+
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"');
+    }
+
+    $(function () {
+
+    $(document).on('click', '.view-modal', function () {
+        var id = $(this).attr('data-id');
+        // alert(id);
+        var html = '';
+
+        // alert(site.url);
+
+        $.ajax({
+            url: site.url + '/' + id,
+            dataType: "json",
+            type: "get",
+            async: true,
+            success: function (data) {
+              // alert(JSON.stringify(data));
+                html += `
+                <div class="row mb-4">
+                  <div class="col-md-4">
+                    <img src="${site.asset + '/' + data.image}" alt="${data.name}" width="100%">
+                  </div>
+                  <div class="col-md-8">
+                  
+                    <table class="table table-bordered table-strip">
+                      <tbody>
+                        <tr>
+                          <td>{{__('admin.province_name')}}</td>
+                          <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.zip_code')}}</td>
+                          <td>${data.zip_code}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.details')}}</td>
+                          <td>${ htmlEntities(data.details) }</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                `;
+                $('.modal-body').empty().append(html);
+
+            },
+        });
+
+    });
+});
+  </script>
+
+
   @include('components.modal-lg')
 @stop

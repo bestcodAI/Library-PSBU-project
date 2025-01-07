@@ -303,7 +303,7 @@
               <li class="nav-item">
                 <a href="{{ admin_url('settings/provinces')}}" class="nav-link {{ request()->is('admin/settings/provinces') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>{{__('admin.add_biller')}}</p>
+                  <p>{{__('admin.provinces')}}</p>
                 </a>
               </li>
             </ul>

@@ -58,10 +58,10 @@
                                 <label for="name">{{__('admin.name')}}</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="{{__('enter_zip_code')}}">
                               </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="slug">slug</label>
                                 <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter Product code">
-                            </div>
+                            </div> --}}
                         </div>
                         
                         

@@ -19,8 +19,6 @@
       </div><!-- /.container-fluid -->
     </section>
 
-
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -29,18 +27,18 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('settings/category_langauges/create') }}">Add</a>
+                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('settings/category_langauges/create') }}">{{__('admin.add_category_language')}}</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>image</th>
-                    <th>code</th>
-                    <th>name</th>
-                    <th>slug</th>
-                    <th>action</th>
+                    <th>{{__('admin.image')}}</th>
+                    <th>{{__('admin.code')}}</th>
+                    <th>{{__('admin.name')}}</th>
+                    <th>{{__('admin.slug')}}</th>
+                    <th>{{__('admin.action')}}</th>
                   </tr>
                   
                   </thead>
@@ -78,5 +76,63 @@
     </section>
     <!-- /.content -->
   </div>
+  <script>
+
+    var site =  {url: "<?= admin_url('settings/category_langauges/') ?>" , asset: "<?= asset('uploads/category_lang/') ?>" }
+
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"');
+    }
+
+    $(function () {
+
+    $(document).on('click', '.view-modal', function () {
+        var id = $(this).attr('data-id');
+        // alert(id);
+        var html = '';
+
+        // alert(site.url);
+
+        $.ajax({
+            url: site.url + '/' + id,
+            dataType: "json",
+            type: "get",
+            async: true,
+            success: function (data) {
+              // alert(JSON.stringify(data));
+                html += `
+                <div class="row mb-4">
+                  <div class="col-md-4">
+                    <img src="${data.image ? site.asset + '/' + data.image : site.asset + '/no_image.png'}" alt="${data.name}" width="100%">
+                  </div>
+                  <div class="col-md-8">
+                  
+                    <table class="table table-bordered table-strip">
+                      <tbody>
+                        <tr>
+                          <td>{{__('admin.province_name')}}</td>
+                          <td>${data.name}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.zip_code')}}</td>
+                          <td>${data.zip_code}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.details')}}</td>
+                          <td>${ htmlEntities(data.details) }</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                `;
+                $('.modal-body').empty().append(html);
+
+            },
+        });
+
+    });
+});
+  </script>
   @include('components.modal-lg')
 @stop

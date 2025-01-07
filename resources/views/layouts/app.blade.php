@@ -77,10 +77,6 @@
 </div>
 <!-- ./wrapper -->
 
-<script>
-  var site =  {url: "<?= admin_url('categories') ?>" , asset: "<?= asset('uploads/category/') ?>" } ;
-</script>
-
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script> --}}
@@ -179,8 +175,6 @@
   $(function () {
     // Summernote
     $('#summernote').summernote()
-
-    // CodeMirror
     CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
       mode: "htmlmixed",
       theme: "monokai"
