@@ -27,6 +27,17 @@
             </div>
           </div>
         </div>
+        <div class="form-group mt-4 mb-4">
+          <div class="captcha">
+              <span>{!! App\Http\Controllers\Auth\AuthenticatedSessionController::generateCaptcha(config('captcha.default.type')) !!}</span>
+              <button type="button" class="btn btn-danger reload" id="reload">↻</button>
+          </div>
+          {{-- <div class="form-group"> --}}
+                <input id="captcha" type="text" class="form-control mt-1" placeholder="Enter Captcha" name="captcha">
+            {{-- </div> --}}
+            
+      </div>
+        
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
@@ -44,14 +55,14 @@
         </div>
       </form>
 
-      <div class="social-auth-links text-center mt-2 mb-3">
+      {{-- <div class="social-auth-links text-center mt-2 mb-3">
         <a href="{{ route('auth.facebook') }}" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
         </a>
         <a href="{{ route('google.redirect') }}" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
         </a>
-      </div>
+      </div> --}}
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
@@ -66,6 +77,19 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
+
+<script type="text/javascript">
+    $('#reload').click(function() {
+        $.ajax({
+            type: 'GET',
+            url: '{{ url('reload-captcha') }}',
+            success: function(data) {
+              
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
+</script>
 
 @endsection
 
