@@ -63,7 +63,7 @@ Route::middleware('auth','admin')->group(function () {
     Route::prefix(prefix_url().'/admin')->group(function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-        Route::get('/localization/{lang}',[LocalizationController::class , 'index']);
+        Route::get('/localization/{local}',[LocalizationController::class , 'index']);
         
         //reports
         Route::prefix('/reports')->group(function() {

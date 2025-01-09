@@ -18,11 +18,21 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Session::has("locale")){
-            App::setLocale(Session::get("locale"));
-        }else{
-            App::setLocale(config("app.locale"));
+        // if(Session::has("locale")){
+        //     App::setLocale(Session::get("locale"));
+        // }else{
+        //     App::setLocale(config("app.locale"));
+        // }
+
+        $locale = $request->get('locale'); // Default locale if not provided
+        $allowedLocales = ['en', 'km', 'es'];
+
+        // Validate locale
+        if (!in_array($locale, $allowedLocales)) {
+            $locale = 'en'; // Fallback to default
         }
+
+        App::setLocale($locale);
         
         return $next($request);
     }
