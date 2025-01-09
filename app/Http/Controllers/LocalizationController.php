@@ -15,10 +15,10 @@ class LocalizationController extends Controller
     public function index($locale) {
 
         if($locale) {
-            Session::put("locale",$locale);
+            Session::put("app_lang",$locale);
         } else {
             $locale_current = request()->cookie("language");
-            Session::put("locale",$locale_current);
+            Session::put("app_lang",$locale_current);
         }
 
         if($locale == 'km') {
