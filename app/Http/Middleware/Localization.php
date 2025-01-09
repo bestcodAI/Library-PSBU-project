@@ -23,7 +23,6 @@ class Localization
         }else{
             App::setLocale(config("app.locale"));
         }
-        
         return $next($request);
     }
     
