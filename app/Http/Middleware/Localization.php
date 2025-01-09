@@ -27,6 +27,8 @@ class Localization
         $locale = $request->get('locale'); // Default locale if not provided
         $allowedLocales = ['en', 'km', 'es'];
 
+        dd($locale);
+
         // Validate locale
         if (!in_array($locale, $allowedLocales)) {
             $locale = 'en'; // Fallback to default
