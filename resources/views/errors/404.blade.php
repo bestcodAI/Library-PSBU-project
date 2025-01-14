@@ -668,9 +668,9 @@ nav .menu .menu_icon:hover .icon:after {
         <div class="menu">
             {{-- <p class="website_name">LOGO</p> --}}
             <div class="menu_links">
-                <a href="" class="link">about</a>
-                <a href="" class="link">projects</a>
-                <a href="" class="link">contacts</a>
+                <a href="" class="link">{{__('admin.about')}}</a>
+                <a href="" class="link">{{__('admin.projects')}}</a>
+                <a href="" class="link">{{__('admin.contacts')}}</a>
             </div>
             <div class="menu_icon">
                 <span class="icon"></span>

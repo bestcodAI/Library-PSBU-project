@@ -27,6 +27,7 @@
             </div>
           </div>
         </div>
+        @if(settings()->captcha)
         <div class="form-group mt-4 mb-4">
           <div class="captcha">
               <span>{!! App\Http\Controllers\Auth\AuthenticatedSessionController::generateCaptcha(config('captcha.default.type')) !!}</span>
@@ -35,8 +36,9 @@
           {{-- <div class="form-group"> --}}
                 <input id="captcha" type="text" class="form-control mt-1" placeholder="Enter Captcha" name="captcha">
             {{-- </div> --}}
-            
       </div>
+
+      @endif
         
         <div class="row">
           <div class="col-8">

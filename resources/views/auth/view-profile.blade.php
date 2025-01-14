@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Profile</h1>
+            <h1>{{__('admin.profile')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User Profile</li>
+              <li class="breadcrumb-item"><a href="#">{{__('admin.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('admin.user_profile')}}</li>
             </ol>
           </div>
         </div>
@@ -168,24 +168,27 @@
 
                   {{-- change password --}}
                   <div class="tab-pane" id="change_password">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" action="{{ route('auth.password.update') }}" method="post">
+                      @method('PUT')
+                      @csrf
+          
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Old Password</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">Current Password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" value="" id="old_password" placeholder="Enter old password">
+                          <input type="password" class="form-control" name="current_password" id="current_password" placeholder="Enter current password">
                         </div>
                       </div>
                   
                       <div class="form-group row">
                         <label for="new_password" class="col-sm-2 col-form-label">New password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="new_password" placeholder="Enter new password">
+                          <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Enter new password">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputName2" class="col-sm-2 col-form-label">Confirm password</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" id="confirm_password" placeholder="Enter confirm password">
+                          <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Enter confirm password">
                         </div>
                       </div>
                       

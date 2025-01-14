@@ -1,6 +1,7 @@
 <?php 
 
 use Carbon\Carbon; 
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -39,7 +40,7 @@ if(!function_exists('checkStatus')) {
             return "<span class='badge badge-warning'>" . $status."</span>";
         } elseif($status == 'success') {
             return "<span class='badge badge-success'>" . $status."</span>";
-        }elseif($status == 'danger') {
+        }elseif($status == 'disable') {
             return "<span class='badge badge-danger'>" . $status."</span>";
         }
     }
@@ -118,6 +119,8 @@ if(!function_exists('checkCreditCard')) {
 
  if(!function_exists('prefix_url')) {
     function prefix_url() {
-        return '';
+
+        $site_prefix = DB::table('settings')->first()->site_prefix;
+        return $site_prefix;
     }
  }

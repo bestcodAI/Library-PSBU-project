@@ -29,7 +29,6 @@ class User extends Authenticatable
         'experience',
         'is_agrree',
         'activate_code',
-        'activated',
         'last_login_at',
         'last_login_ip',
         'brower_login',

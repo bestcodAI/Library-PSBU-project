@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class Localization
 {
@@ -21,6 +22,8 @@ class Localization
         if(Session::has("app_lang")){
             App::setLocale(Session::get("app_lang"));
         }else{
+            $lang = DB::table('settings')->first();
+            cookie()->queue(cookie()->forever("language", $lang->language));
             App::setLocale(config("app.locale"));
         }
         return $next($request);

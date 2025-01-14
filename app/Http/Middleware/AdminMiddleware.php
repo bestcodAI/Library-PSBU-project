@@ -16,10 +16,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        
         if (auth()->check() && auth()->user()->user_type === 'admin') {
             return $next($request);
         }
-        return redirect('/home')->with('error', 'Unauthorized access.');
+        return redirect('/home')->with('error', 'Unauthorized access admin middle.');
     }
 }
