@@ -14,7 +14,9 @@ class AttandentController extends Controller
      */
     public function index()
     {
-        return 'hello view';
+        $attendance = ['1','2','3','4'];
+
+        return view('attendance.index', ['categories' => $attendance]);
     }
 
     /**

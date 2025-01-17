@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
   <!-- DataTables -->
-  
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
@@ -69,7 +68,7 @@
 
   <!-- Main Footer -->
   <footer class="main-footer no-print">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">Developer</a>.</strong>
+    <strong>Copyright &copy; <?= date('Y'); ?> <a href="https://chamnan-dev.vercel.app/">Chamnan Dev</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <span>{{__('admin.login_device')}}: {{Auth::user()->os_login}} ,({{__('admin.login_browser')}}: {{Auth::user()->brower_login}})</span>
@@ -81,28 +80,28 @@
 
 <!-- REQUIRED SCRIPTS -->
 <!-- Bootstrap -->
-<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script async src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
-<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script async src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('dist/js/adminlte.js') }}"></script>
-<script src="{{ asset('dist/js/core.js') }}"></script>
+<script async src="{{ asset('dist/js/adminlte.js') }}"></script>
+<script async src="{{ asset('dist/js/core.js') }}"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
-<script src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
-<script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
-<script src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
+<script async src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
+<script async src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
+<script async src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
+<script async src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 
-<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+<script async src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
 <!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
 
 {{-- @if(request()->path() == 'product/create') --}}
-  <script>
+  <script async>
   $(function () {
     $.validator.setDefaults({
       submitHandler: function () {
@@ -154,24 +153,24 @@
 
 {{-- @if(request()->path() == 'product') --}}
 <!-- DataTables  & Plugins -->
-<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
-<script src="{{asset('dist/js//datatables.js')}}"></script>
-<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<script async src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script async src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+<script async src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script async src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script async src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script async src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script async src="{{asset('dist/js//datatables.js')}}"></script>
+<script async src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- @endif --}}
 <!-- Summernote -->
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<script>
+<script async src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script async>
   $(function () {
     // Summernote
     $('#summernote').summernote()
@@ -182,12 +181,12 @@
   })
 </script>
 <!-- Toastr -->
-<script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+<script async src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 <!-- SweetAlert2 -->
-<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script async src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
   @if(session('success'))
-    <script>$(function(){
+    <script async>$(function(){
       var Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -200,7 +199,7 @@
       })
     })</script> 
   @elseif(session('info')) 
-  <script>$(function(){
+  <script async>$(function(){
     var Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -215,7 +214,7 @@
 
     {{-- <script> $(function(){toastr.info("{{ session('info') }}") })</script> --}}
   @elseif(session('warning'))
-  <script>$(function(){
+  <script async>$(function(){
     var Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -229,7 +228,7 @@
   })</script>
   {{-- <script> $(function(){toastr.warning("{{ session('warning') }}") })</script> --}}
   @elseif(session('error')) 
-  <script>$(function(){
+  <script async>$(function(){
     var Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -244,7 +243,7 @@
   {{-- <scrip> $(function(){toastr.error("{{ session('error') }}") })</script> --}}
   @endif
 
-  <script>
+  <script async>
     
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
@@ -255,14 +254,14 @@
       document.querySelector(".date").value = today;
   </script>
 
-  <script>
+  <script async>
     var get_code =  '{{request()->cookie("language");}}';
       $('.show-flag').addClass('flag-icon-'+ get_code); 
       $('.flag-icon-'+ get_code).addClass('active'); 
   
   </script>
 
-<script>
+<script async>
 
       // var themes =  localStorage.getItem("themes");
       var themes = getCookie("themes");
@@ -290,7 +289,7 @@
 
   </script>
 
-  <script>
+  <script async>
     $(function () {
     //Initialize Select2 Elements
     $('.select2bs4').select2({
@@ -300,7 +299,5 @@
   </script>
   
 
-
-{{-- {{ dd(request()->path()) }} --}}
 </body>
 </html>

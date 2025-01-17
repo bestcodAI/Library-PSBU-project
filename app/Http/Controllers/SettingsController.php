@@ -28,12 +28,26 @@ class SettingsController extends Controller
         ]);
 
         $data = [
-            'site_name' => $request->input('site_name'),
-            'language' => $request->input('language'),
-            // 'default_warehouse' => $request->input('warehouse'),
-            // 'accounting_method' => $request->input('account'),
-            // 'default_currency' => $request->input('currency'),
-            // 'default_tax_rate' => $request->input('default_tax_rat'),
+            'site_name'         => $request->input('site_name'),
+            'language'          => $request->input('language'),
+            'student_prefix'    => $request->input('student_prefix'),
+            'book_prefix'       => $request->input('book_prefix'),
+            'attendance_prefix' => $request->input('attendance_prefix'),
+            'borrow_prefix'     => $request->input('borrow_prefix'),
+            'theme'             => $request->input('theme'),
+            'timezone'          => $request->input('timezone'),
+            'iwidth'            => $request->input('iwidth'),
+            'iheight'           => $request->input('iheight'),
+            'watermark'         => $request->input('watermark'),
+            'captcha'           => $request->input('captcha'),
+            'is_demo'           => $request->input('is_demo'),
+            'hidden_login_btn'  => $request->input('hidden_login_btn'),
+            'ip_address_allow'  => $request->input('ip_address_allow'),
+            'start_ip_address'  => $request->input('start_ip_address'),
+            'end_ip_address'    => $request->input('end_ip_address'),
+            'using_in_area'     => $request->input('using_in_area'),
+            'avariable_register_page' => $request->input('avariable_register_page'),
+            'site_prefix'       => $request->input('site_prefix')
         ];
         
         if (!empty($request->image)) {
