@@ -27,19 +27,19 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('categories/create') }}">Add</a>
+                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('borrowers/create') }}">{{__('admin.add_borrower')}}</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>image</th>
-                    <th>code</th>
-                    <th>name</th>
-                    <th>slug</th>
-                    <th>Parent</th>
-                    <th>action</th>
+                    <th>{!!__('admin.image')!!}</th>
+                    <th>{{__('admin.code')}}</th>
+                    <th>{{__('admin.name')}}</th>
+                    <th>{{__('admin.slug')}}</th>
+                    <th>{{__('admin.slug')}}</th>
+                    <th>{{__('admin.action')}}</th>
                   </tr>
                   
                   </thead>

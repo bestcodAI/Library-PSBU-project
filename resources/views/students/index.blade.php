@@ -19,8 +19,6 @@
       </div><!-- /.container-fluid -->
     </section>
 
-
-
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -29,7 +27,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('students/create') }}">{{__('admin.add_student')}}</a>
+                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('peoples/students/create') }}">{{__('admin.add_student')}}</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -38,33 +36,33 @@
                   <tr>
                     <th>{{__('admin.image')}}</th>
                     <th>{{__('admin.reference_no')}}</th>
-                    <th>{{__('admin.name')}}</th>
+                    <th>{{__('admin.first_name')}}</th>
+                    <th>{{__('admin.last_name')}}</th>
+                    <th>{{__('admin.nick_name')}}</th>
                     <th>{{__('admin.gender')}}</th>
-                    <th>{{__('admin.place')}}</th>
                     <th>{{__('admin.action')}}</th>
                   </tr>
-                  
                   </thead>
                   <tbody>
                     @foreach($students as $student)
                   <tr class="text-center">
                     <td><img width="50px" src="{{ $student->image ? asset('uploads/category/'. $student->image) : asset('images/no_image.png');  }}"></td>
-                    <td>{{  $student->code }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>{{ $student->slug }}</td>
-                    <td>{{ $student->parent_name }}</td>
+                    <td>{{ $student->code }}</td>
+                    <td>{{ $student->first_name }}</td>
+                    <td>{{ $student->last_name }}</td>
+                    <td>{{ $student->nick_name }}</td>
+                    <td>{{ $student->dob }}</td>
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $student->id}}" data-toggle="modal" data-target="#modal-lg">view</button>
-                        <a href="{{ admin_url('categories/'. $student->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form  action="{{ admin_url('categories/'. $student->id) }}" method="post">
+                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $student->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa fa-eye"></i></button>
+                        <a href="{{ admin_url('peoples/students/'. $student->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa fa-edit"></i></a>
+                        <form  action="{{ admin_url('peoples/students/'. $student->id) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa fa-trash"></i></button>
                         </form>
                     </td>
                   </tr>
                   @endforeach
-                  
                   </tfoot>
                 </table>
               </div>

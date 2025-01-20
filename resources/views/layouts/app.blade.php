@@ -11,7 +11,7 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')  }}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}"> --}}
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <!-- summernote -->
@@ -25,7 +25,7 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+  {{-- <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}"> --}}
 
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
    
@@ -38,7 +38,6 @@
     font-family: "Battambang", system-ui !important;
   }
   </style>
-
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
   <!-- SweetAlert2 -->
@@ -82,26 +81,18 @@
 <!-- Bootstrap -->
 <script async src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- overlayScrollbars -->
-<script async src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+{{-- <script async src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script> --}}
 <!-- AdminLTE App -->
-<script async src="{{ asset('dist/js/adminlte.js') }}"></script>
-<script async src="{{ asset('dist/js/core.js') }}"></script>
+<script src="{{ asset('dist/js/adminlte.js') }}"></script>
+<script src="{{ asset('dist/js/core.js') }}"></script>
 
 <!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script async src="{{ asset('plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
-<script async src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
-<script async src="{{ asset('plugins/jquery-mapael/jquery.mapael.min.js') }}"></script>
-<script async src="{{ asset('plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 
-<script async src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-
-<!-- <script src="{{ asset('dist/js/demo.js') }}"></script> -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 <script src="{{ asset('dist/js/pages/dashboard2.js') }}"></script>
 
 {{-- @if(request()->path() == 'product/create') --}}
-  <script async>
+  {{-- <script>
   $(function () {
     $.validator.setDefaults({
       submitHandler: function () {
@@ -146,7 +137,7 @@
       }
     });
   });
-  </script>
+  </script> --}}
 {{-- @endif --}}
 
 
@@ -169,16 +160,14 @@
 <script async src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 {{-- @endif --}}
 <!-- Summernote -->
-<script async src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
-<script async>
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script>
   $(function () {
-    // Summernote
-    $('#summernote').summernote()
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
+    $('#summernote').summernote({
+      placeholder: 'Please write your description in here...',
+      height: 200
+    })
+  });
 </script>
 <!-- Toastr -->
 <script async src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>

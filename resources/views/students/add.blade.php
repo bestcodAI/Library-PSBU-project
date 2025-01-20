@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{ admin_url('categories') }}" method="POST" enctype="multipart/form-data">
+              <form id="quickForm" action="{{ admin_url('peoples/students') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="card-body">
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="father_phone">{{__('admin.father_phone')}}</label>
-                                <input type="text" name="father_phone" class="form-control" id="father_phone" placeholder="{{__('admin.enter_father_phone')}}">
+                                <input type="text" name="mother_phone" class="form-control" id="mother_phone" placeholder="{{__('admin.enter_mother_phone')}}">
                             </div>
 
                         </div>
@@ -91,7 +91,7 @@
 
                             <div class="form-group">
                                 <label>{{__('admin.province')}}</label>
-                                <select class="form-control select2" name="provice_id" id="province_id" style="width: 100%;">
+                                <select class="form-control select2" name="province_id" id="province_id" style="width: 100%;">
                                   <option value="">{{__('admin.select_province')}}</option>
                                   @foreach($provinces as $province)
                                   <option value="{{ $province->id }}">{{ $province->name }}</option>

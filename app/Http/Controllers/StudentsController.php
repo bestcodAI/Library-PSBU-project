@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StudentsController extends Controller
 {
@@ -25,7 +26,9 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('students.add');
+        $provinces =  DB::table('provinces')->get();
+
+        return view('students.add', ['provinces' => $provinces]);
     }
 
     /**
@@ -36,35 +39,48 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
+
         $valid = $request->validate([
-            'student_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'dob' => 'required',
+            'gender' => 'required',
+            'pob' => 'required',
         ]);
 
-        $reference_code = Str::random(40);
+        $reference_code = Str::random(10);
+        $slug =  Str::random(40);
 
         $data =  [
-            'reference_code' => $request->code,
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'author' => $request->author_name,
-            'author_date' => $request->author_date,
-            'category_lang_id' => $request->category_lang_id,
-            'category_id' => $request->category,
-            'details' => clear_tag($request->description),
+            'code'          => $reference_code,
+            'slug'          => $slug,
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'nick_name'     => $request->nick_name,
+            'dob'           => $request->dob,
+            'pob'           => $request->pob,
+            'phone'         => $request->phone,
+            'email'         => $request->email,
+            'father_phone'  => $request->father_phone,
+            'mother_phone'  => $request->mother_phone,
+            'province_id'   => $request->province_id,
+            'description' => clear_tag($request->description),
         ];
+
+        // dd($data);
 
         if (!empty($request->image)) {
             $file =$request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = hash('gost',(time().'.' . $extension));
-            $file->move(public_path('uploads/books/'), $filename);
+            $file->move(public_path('uploads/student/'), $filename);
             $data['image']= $filename;
         }
 
 
-        DB::table('books')->insert($data);
+        DB::table('students')->insert($data);
 
-        return admin_redirect('books')->with('success', 'book added');
+        return admin_redirect('students')->with('success', 'student_added');
     }
 
     /**

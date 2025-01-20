@@ -44,11 +44,11 @@
             <!-- About Me Box -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">About Me</h3>
+                <h3 class="card-title">{{__('admin.abount_me')}}</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                <strong><i class="fas fa-book mr-1"></i> {{__('admin.education')}}</strong>
 
                 <p class="text-muted">
                   B.S. in Computer Science from the University of Tennessee at Knoxville
@@ -87,9 +87,9 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#edit_profile" data-toggle="tab">Edite</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#change_password" data-toggle="tab">Change passowrd</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#avatar" data-toggle="tab">Avatar</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#edit_profile" data-toggle="tab">{{__('admin.edite')}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#change_password" data-toggle="tab">{{__('admin.change_passowrd')}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#avatar" data-toggle="tab">{{__('admin.avatar')}}</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -101,49 +101,49 @@
                     <form class="form-horizontal" action="{{ route('profile.update') }}" method="POST">
                       @csrf
                       @method('PATCH')
-                      
+      
                       <div class="form-group row">
-                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <label for="name" class="col-sm-2 col-form-label">{{__('admin.name')}}</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" value="{{$user->name }}" id="name" name="name" placeholder="Enter Your Name">
                         </div>
                       </div>
                   
                       <div class="form-group row">
-                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <label for="email" class="col-sm-2 col-form-label">{{__('admin.email')}}</label>
                         <div class="col-sm-10">
                           <input type="email" class="form-control" value="{{$user->email}}" name="email" id="email" placeholder="Email">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                        <label for="phone" class="col-sm-2 col-form-label">{{__('admin.phone')}}</label>
                         <div class="col-sm-10">
                           <input type="number" class="form-control" id="phone" value="{{ $user->phone }}" name="phone" placeholder="Enter your phone">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="phone" class="col-sm-2 col-form-label">Gender</label>
+                        <label for="phone" class="col-sm-2 col-form-label">{{__('admin.gender')}}</label>
                         <div class="col-sm-10">
                           <select class="form-control select2" style="width: 100%;"  name="gender" id="gender">
-                            <option  value="male" {{ $user->gender == 'male' ? 'selected="selected"' :'' }} >Male</option>
-                            <option  value="female" {{ $user->gender == 'female' ? 'selected="selected"' :'' }} >Female</option>
+                            <option  value="male" {{ $user->gender == 'male' ? 'selected="selected"' :'' }} >{{__('admin.male')}}</option>
+                            <option  value="female" {{ $user->gender == 'female' ? 'selected="selected"' :'' }} >{{__('admin.female')}}</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="address" class="col-sm-2 col-form-label">Address</label>
+                        <label for="address" class="col-sm-2 col-form-label">{{__('admin.address')}}</label>
                         <div class="col-sm-10">
                           <textarea class="form-control" id="address" name="address" id="address"  placeholder="Enter your address">{{ $user->address }}</textarea>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="experience" class="col-sm-2 col-form-label">Experience</label>
+                        <label for="experience" class="col-sm-2 col-form-label">{{__('admin.experience')}}</label>
                         <div class="col-sm-10">
                           <textarea class="form-control" id="experience" name="experience" placeholder="Experience">{{ $user->experience }}</textarea>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="skills" class="col-sm-2 col-form-label">Skills</label>
+                        <label for="skills" class="col-sm-2 col-form-label">{{__('admin.skills')}}</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" id="skills" value="{{ $user->skills }}" name="skills" placeholder="Skills">
                         </div>
@@ -159,7 +159,7 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" class="btn btn-danger">{{__('admin.submit')}}</button>
                         </div>
                       </div>
                     </form>
@@ -168,33 +168,32 @@
 
                   {{-- change password --}}
                   <div class="tab-pane" id="change_password">
-                    <form class="form-horizontal" action="{{ route('auth.password.update') }}" method="post">
-                      @method('PUT')
+                    <form class="form-horizontal" action="{{ route('password.update') }}" method="POST">
                       @csrf
-          
+                      @method('PUT')
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Current Password</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">{{__('admin.current_password')}}</label>
                         <div class="col-sm-10">
                           <input type="password" class="form-control" name="current_password" id="current_password" placeholder="Enter current password">
                         </div>
                       </div>
                   
                       <div class="form-group row">
-                        <label for="new_password" class="col-sm-2 col-form-label">New password</label>
+                        <label for="password" class="col-sm-2 col-form-label">{{__('admin.new_password')}}</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" name="new_password" id="new_password" placeholder="Enter new password">
+                          <input type="password" class="form-control" name="password" id="password" placeholder="Enter new password">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Confirm password</label>
+                        <label for="password_confirmation" class="col-sm-2 col-form-label">{{__('admin.confirm_password')}}</label>
                         <div class="col-sm-10">
-                          <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Enter confirm password">
+                          <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Enter confirm password">
                         </div>
                       </div>
                       
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Change password</button>
+                          <button type="submit" class="btn btn-danger">{{__('admin.change_password')}}</button>
                         </div>
                       </div>
                     </form>
@@ -202,20 +201,20 @@
                   <!-- /.tab-pane -->
                   {{-- update avatar --}}
                   <div class="tab-pane" id="avatar">
-                    <form class="form-horizontal" method="POST" action="{{ admin_url('profile/update_avatar')}}" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="{{ admin_url('profile/update_avatar') }}" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Avatar</label>
+                        <label for="inputName" class="col-sm-2 col-form-label">{{__('admin.avatar')}}</label>
                         <div class="col-sm-10">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="profile" name="profile">
-                            <label class="custom-file-label" for="profile">Choose file</label>
+                            <label class="custom-file-label" for="profile">{{__('admin.choose_file')}}</label>
                           </div>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-primary">Update avatar</button>
+                          <button type="submit" class="btn btn-primary">{{__('admin.update_avatar')}}</button>
                         </div>
                       </div>
                     </form>

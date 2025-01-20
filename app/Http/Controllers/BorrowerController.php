@@ -39,11 +39,31 @@ class BorrowerController extends Controller
 
     public function get_data($term) 
     {
-        $data = DB::table('books')
+
+        $pr = [];
+        $rows = DB::table('books')
         ->where('code', 'LIKE', "%{$term}%") 
         ->orWhere('title', 'LIKE', "%{$term}%")
         ->get();
-        return response()->json([$data]);
+
+        if(!empty($rows)) {
+            $r = 0;
+            foreach($rows as $row) {
+                unset($row->created_by, $row->created_at, $row->updated_at, $row->details, $row->slug, $row->views, $row->author, $row->author_date,$row->category_lang_id,$row->category_id);
+                $c = uniqid(mt_rand(), true);
+                $row->qty = 1; 
+                $pr[] = ['mt_rand' => mt_rand(), 'id' => sha1($c . $r), 'item_id' => $row->id,'label' => $row->title . ' (' . $row->code . ')', 'row' => $row];
+                $r++;
+            }
+        } 
+
+        if($pr) { 
+            return response()->json($pr);
+           }else {
+            return response()->json([['id' => 0, 'label' => __('no_match_found')]]);
+        }
+
+        
     }
 
     /**

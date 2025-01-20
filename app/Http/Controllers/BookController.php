@@ -74,7 +74,7 @@ class BookController extends Controller
 
         DB::table('books')->insert($data);
 
-        return admin_redirect('books')->with('success', 'book added');
+        return admin_redirect('group_book/books')->with('success', 'book added');
     }
 
     /**
