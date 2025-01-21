@@ -67,8 +67,6 @@ class StudentsController extends Controller
             'description' => clear_tag($request->description),
         ];
 
-        // dd($data);
-
         if (!empty($request->image)) {
             $file =$request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -77,10 +75,9 @@ class StudentsController extends Controller
             $data['image']= $filename;
         }
 
-
         DB::table('students')->insert($data);
 
-        return admin_redirect('students')->with('success', 'student_added');
+        return admin_redirect('peoples/students')->with('success', 'student_added');
     }
 
     /**
@@ -91,7 +88,9 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $student  = DB::table('students')->where('id', $id)->first();
+
+        return response()->json($student);
     }
 
     /**
@@ -102,7 +101,9 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        return view('students.edit');
+        $provinces = DB::table('provinces')->get();
+        $student = DB::table('students')->where('id',$id)->first();
+        return view('students.edit',['student' => $student,'provinces' => $provinces]);
     }
 
     /**
@@ -114,7 +115,38 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
+        $data =  [
+            'first_name'    => $request->first_name,
+            'last_name'     => $request->last_name,
+            'nick_name'     => $request->nick_name,
+            'dob'           => $request->dob,
+            'pob'           => $request->pob,
+            'phone'         => $request->phone,
+            'email'         => $request->email,
+            'father_phone'  => $request->father_phone,
+            'mother_phone'  => $request->mother_phone,
+            'province_id'   => $request->province_id,
+            'description' => clear_tag($request->description),
+        ];
+
+        if (!empty($request->image)) {
+
+            $old_image =  DB::table('students')->where('id', $id)->first()->image;
+            $file =$request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = hash('gost',(time().'.' . $extension));
+            $file->move(public_path('uploads/student/'), $filename);
+            $data['image']= $filename;
+
+            if($old_image) {
+                unlink(public_path('uploads/student/'. $old_image));
+            }
+        }
+
+        DB::table('students')->where('id', $id)->update($data);
+
+        return admin_redirect('peoples/students')->with('success', 'student_updated');
     }
 
     /**
@@ -125,6 +157,13 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        DB::table('students')->where(['id' => $id])->delete();
+        $delete_image = DB::table('students')->where('id',$id)->first();
+
+        if($delete_image->image) {
+            unlink(public_path('uploads/student/'.$delete_image->image));
+        }
+        return admin_redirect('peoples/students')->with('success', __('admin.student_deleted'));
     }
 }

@@ -89,12 +89,12 @@
                   <p>{{__('admin.add_book')}}</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="{{ admin_url('group_book/import') }}" class="nav-link {{ request()->is('admin/group_book/import') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.import_books')}}</p>
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a href="{{ admin_url('group_book/print_barcodes') }}" class="nav-link {{ request()->is('admin/group_book/print_barcodes') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
@@ -147,7 +147,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{admin_url('books/create')}}" class="nav-link {{ request()->is('admin/attendances/create') ? 'active' : '' }}">
+              <a href="{{admin_url('attendances/create')}}" class="nav-link {{ request()->is('admin/attendances/create') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>{{__('admin.add_attendance')}}</p>
               </a>

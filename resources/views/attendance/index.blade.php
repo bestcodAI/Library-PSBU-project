@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{__('admin.categories')}}</h1>
+            <h1>{{__('admin.attendances')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">{{__('admin.home')}}</a></li>
-              <li class="breadcrumb-item active">{{__('admin.categories')}}</li>
+              <li class="breadcrumb-item active">{{__('admin.attendances')}}</li>
             </ol>
           </div>
         </div>
@@ -27,14 +27,13 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('settings/categories/create') }}">{{__('admin.add_category')}}</a>
+                <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('attendances/create') }}">{{__('admin.add_attendance')}}</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="table-category" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>{{__('admin.image')}}</th>
                     <th>{{__('admin.code')}}</th>
                     <th>{{__('admin.name')}}</th>
                     <th>{{__('admin.slug')}}</th>
@@ -44,17 +43,17 @@
                   
                   </thead>
                   <tbody>
-                    @foreach($categories as $category)
+                    @foreach($attendances as $attendance)
                   <tr class="text-center">
-                    <td><img width="50px" src="{{ $category->image ? asset('uploads/category/'. $category->image) : asset('images/no_image.png');  }}"></td>
-                    <td>{{  $category->code }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->slug }}</td>
-                    <td>{{ $category->parent_name }}</td>
+                    
+                    <td>{{  $attendance->code }}</td>
+                    <td>{{ $attendance->student_id }}</td>
+                    <td>{{ $attendance->checkin_at }}</td>
+                    <td>{{ $attendance->checkout_at }}</td>
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $category->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fa fa-eye"></i></button>
-                        <a href="{{ admin_url('settings/categories/'. $category->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                        <form  action="{{ admin_url('settings/categories/'. $category->id) }}" method="post">
+                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $attendance->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fa fa-eye"></i></button>
+                        <a href="{{ admin_url('settings/categories/'. $attendance->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                        <form  action="{{ admin_url('settings/categories/'. $attendance->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>

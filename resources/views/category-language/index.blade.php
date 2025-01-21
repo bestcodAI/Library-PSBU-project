@@ -85,11 +85,12 @@
     }
 
     $(function () {
-
     $(document).on('click', '.view-modal', function () {
         var id = $(this).attr('data-id');
         // alert(id);
         var html = '';
+
+        $(".modal-title").text('{{__("admin.category_lange")}}');
 
         // alert(site.url);
 
@@ -99,7 +100,7 @@
             type: "get",
             async: true,
             success: function (data) {
-              // alert(JSON.stringify(data));
+                
                 html += `
                 <div class="row mb-4">
                   <div class="col-md-4">
@@ -110,24 +111,20 @@
                     <table class="table table-bordered table-strip">
                       <tbody>
                         <tr>
-                          <td>{{__('admin.province_name')}}</td>
+                          <td>{{__('admin.code')}}</td>
+                          <td>${data.code}</td>
+                        </tr>
+                        <tr>
+                          <td>{{__('admin.name')}}</td>
                           <td>${data.name}</td>
                         </tr>
-                        <tr>
-                          <td>{{__('admin.zip_code')}}</td>
-                          <td>${data.zip_code}</td>
-                        </tr>
-                        <tr>
-                          <td>{{__('admin.details')}}</td>
-                          <td>${ htmlEntities(data.details) }</td>
-                        </tr>
+                      
                       </tbody>
                     </table>
                   </div>
                 </div>
                 `;
                 $('.modal-body').empty().append(html);
-
             },
         });
 

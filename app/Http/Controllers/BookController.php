@@ -83,9 +83,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-       // this is show all all in books
+        $book =  DB::table('books')->where('id', $id)->first();
+       return response()->json($book);
     }
 
     /**

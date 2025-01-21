@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Category</h1>
+            <h1>{{__('admin.scanner_attendance')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Category</li>
+              <li class="breadcrumb-item"><a href="#">{{__('admin.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('admin.scanner_attendance')}}</li>
             </ol>
           </div>
         </div>
@@ -52,16 +52,12 @@
                                 <label for="slug">slug</label>
                                 <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter Product code">
                             </div>
-                            
+
                             <div class="form-group">
-                                <label>Parent</label>
-                                <select class="form-control select2" name="parent" id="parent" style="width: 100%;">
-                                  <option value="">Select Parent cateory</option>
-                                  @foreach($categories as $category)
-                                  <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                  @endforeach
-                                </select>
+                                <label for="slug">date</label>
+                                <input type="date" name="checkin" class="form-control" id="checkin" placeholder="Enter Product code">
                             </div>
+                            
                         </div>
                         <div class="col-md-12">
                           <div class="form-group">
@@ -71,7 +67,6 @@
                                 <input type="file" class="custom-file-input" id="image" name="image">
                                 <label class="custom-file-label" for="image">Choose file</label>
                               </div>
-                             
                             </div>
                           </div>
 

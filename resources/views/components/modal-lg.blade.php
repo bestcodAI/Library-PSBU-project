@@ -1,19 +1,20 @@
+<script src="{{asset('plugins/barcode_qrcode.min.js')}}"></script>
 <div class="modal fade" id="modal-lg">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Category view</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h4 class="modal-title"></h4>
+          
+          <button type="button" class="close no-print" style="margin-right: 10px" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+
+          <button type="button" class="btn btn-primary btn-sm no-print float-end" onclick="window.print()">print</button>
+          
         </div>
         <div class="modal-body">
-          {{-- <p>One fine body&hellip;</p> --}}
         </div>
-        {{-- <div class="modal-footer justify-content-between"> --}}
-          {{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
-          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
-        {{-- </div> --}}
+        
       </div>
       <!-- /.modal-content -->
     </div>

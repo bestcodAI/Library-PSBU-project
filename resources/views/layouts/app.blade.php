@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   {{-- <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}"> --}}
 
+ 
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
    
   <link href="{{ asset('plugins/jquery-ui/jquery-ui.css')}}"  rel = "stylesheet">
@@ -36,6 +37,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Battambang:wght@100;300;400;700;900&display=swap');
   body {
     font-family: "Battambang", system-ui !important;
+    
   }
   </style>
   <!-- Toastr -->
@@ -286,7 +288,6 @@
     })
     });
   </script>
-  
 
 </body>
 </html>

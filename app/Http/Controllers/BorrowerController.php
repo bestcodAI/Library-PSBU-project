@@ -112,7 +112,7 @@ class BorrowerController extends Controller
      * @param  \App\Models\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function show(Borrower $borrower)
+    public function show($id)
     {
         //
     }
