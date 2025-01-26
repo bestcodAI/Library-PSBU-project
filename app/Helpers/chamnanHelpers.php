@@ -2,6 +2,7 @@
 
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -14,6 +15,102 @@ if (! function_exists('convertYmdToMdy')) {
     function convertYmdToMdy($date)
     {
         return Carbon::createFromFormat('Y-m-d', $date)->format('m-d-Y');
+    }
+}
+
+//get reference_no
+if(!function_exists('reference_no')) {
+    function reference_no($code, $length) {
+        $reference_no = '';
+        $degit = 0;
+
+        switch($length) {
+            case 1:
+                $degit = 9;
+                break; 
+            case 2:
+                $degit = 99;
+                break; 
+            case 3:
+                $degit = 999;
+                break; 
+            case 4:
+                $degit = 9999;
+                break; 
+            case 5:
+                $degit = 99999;
+                break; 
+            case 6:
+                $degit = 999999;
+                break; 
+            case 7:
+                $degit = 9999999;
+                break; 
+            case 8:
+                $degit = 99999999;
+                break; 
+            case 9:
+                $degit = 999999999;
+                break; 
+            case 10:
+                $degit = 9999999999;
+                break; 
+            case 11:
+                $degit = 99999999999;
+                break; 
+            case 12:
+                $degit = 999999999999;
+                break; 
+            case 13:
+                $degit = 9999999999999;
+                break; 
+            case 14:
+                $degit = 99999999999999;
+                break; 
+            case 15:
+                $degit = 999999999999999;
+                break; 
+            case 16:
+                $degit = 9999999999999999;
+                break; 
+            case 17:
+                $degit = 99999999999999999;
+                break; 
+            case 18:
+                $degit = 999999999999999999;
+                break; 
+            case 19:
+                $degit = 9999999999999999999;
+                break; 
+            case 20:
+                $degit = 99999999999999999999;
+                break; 
+            
+            default: 
+             echo "Under 20 degits";
+             break;
+        }
+
+        $setting = DB::table('settings')->first();
+
+        switch($code) {
+            case 'student':
+                $reference_no = $setting->student_prefix .'-'. random_int(0,$degit);
+                break;
+            case 'attendance':
+                $reference_no = $setting->attendance_prefix.'-'. random_int(0,$degit);
+                break;
+            case 'book': 
+                $reference_no = $setting->book_prefix.'-'. random_int(0,$degit);
+                break;
+            case 'borrow':
+                $reference_no = $setting->borrow_prefix.'-'. random_int(0,$degit);
+                break;
+            default: 
+               $reference_no = 'No prefix data';
+        }
+        
+        return $reference_no;
     }
 }
 
@@ -37,11 +134,11 @@ if(!function_exists('checkStatus')) {
 
     function checkStatus($status) {
         if($status == 'pending') {
-            return "<span class='badge badge-warning'>" . $status."</span>";
+            return "<span class='badge badge-warning text-white'>" . $status."</span>";
         } elseif($status == 'success') {
-            return "<span class='badge badge-success'>" . $status."</span>";
+            return "<span class='badge badge-success text-white'>" . $status."</span>";
         }elseif($status == 'disable') {
-            return "<span class='badge badge-danger'>" . $status."</span>";
+            return "<span class='badge badge-danger text-white'>" . $status."</span>";
         }
     }
 }

@@ -6,6 +6,8 @@ use App\Models\Borrower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon; 
 
 class BorrowerController extends Controller
 {
@@ -16,11 +18,8 @@ class BorrowerController extends Controller
      */
     public function index()
     {
-        $books = DB::table('book_borrowers')
-        ->join('books', 'book_borrowers.book_id','=','books.id')
-        ->join('students', 'book_borrowers.student_id', '=','students.id')
-        ->orderBy('book_borrowers.id','desc')
-        ->select('book_borrowers.*','books.title as book_name', DB::raw("CONCAT('students.first_name', '', 'students.last_name') as student_name"))
+        $books = DB::table('borrowers')
+        ->orderBy('id','desc')
         ->get();
         return view('borrow.index', ['borrowings' => $books]);
     }
@@ -74,36 +73,35 @@ class BorrowerController extends Controller
      */
     public function store(Request $request)
     {
+
         $valid = $request->validate([
             'student_id' => 'required',
-
         ]);
 
-        $reference_code = Str::random(40);
-
         $data =  [
-            'reference_code' => $request->code,
-            'title' => $request->title,
-            'slug' => $request->slug,
-            'author' => $request->author_name,
-            'author_date' => $request->author_date,
-            'category_lang_id' => $request->category_lang_id,
-            'category_id' => $request->category,
-            'details' => clear_tag($request->description),
+            'reference_no' => reference_no('borrow', 10),
+            'start_date' => $request->date,
+            'student_id' => $request->student_id,
+            'created_by' => Auth::user()->id,
+            'status'  => 'pending',
+            'created_at' => Carbon::now(),
+            'note' => clear_tag($request->description),
         ];
 
-        if (!empty($request->image)) {
-            $file =$request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = hash('gost',(time().'.' . $extension));
-            $file->move(public_path('uploads/books/'), $filename);
-            $data['image']= $filename;
+        $id = DB::table('borrowers')->insertGetId($data);
+        $book_borrow =  [];
+
+        for($i = 0; $i < count($request->book_id); $i++) {
+            $book_borrow['borrower_id'] = $id;
+            $book_borrow['book_id'] = $request->book_id[$i];
+            $book_borrow['book_code'] = $request->book_code[$i];
+            $book_borrow['book_name'] = $request->book_name[$i];
+            $book_borrow['quantity'] = $request->quantity[$i];
+            DB::table('book_borrowers')->insert($book_borrow);
         }
 
-
-        DB::table('books')->insert($data);
-
-        return admin_redirect('books')->with('success', 'book added');
+        session(['remove_br' => 1]);
+        return admin_redirect('borrowers')->with('success', 'book_borrower_added');
     }
 
     /**
@@ -114,7 +112,10 @@ class BorrowerController extends Controller
      */
     public function show($id)
     {
-        //
+        $borrower =  DB::table('borrowers')->where('id',$id)->first();
+        $book_borrow = DB::table('book_borrowers')->where('id', $id)->first();
+
+        return response()->json(['borrow' => $borrower, 'book_borrow'=> $book_borrow]);
     }
 
     /**
@@ -148,8 +149,9 @@ class BorrowerController extends Controller
      * @param  \App\Models\Borrower  $borrower
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Borrower $borrower)
+    public function destroy($id)
     {
-
+        DB::table('borrowers')->where('id', $id)->delete();
+        return admin_redirect('borrowers')->with('success', 'book_borrower_deleted');
     }
 }

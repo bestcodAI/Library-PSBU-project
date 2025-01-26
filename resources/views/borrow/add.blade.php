@@ -32,7 +32,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="{{ admin_url('borrowers') }}" method="POST" enctype="multipart/form-data">
+              <form id="quickForm" action="{{ admin_url('borrowers') }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="card-body">
@@ -52,7 +52,8 @@
                         <div class="col-md-4">
                           <div class="form-group">
                               <label for="bstudent">{{__('admin.students')}}</label>
-                              <select class="form-control select2" name="student_id" id="bstudent" style="width: 100%;">
+                              <input type="hidden" name="student_id" id="sselected">
+                              <select class="form-control select2" id="bstudent" style="width: 100%;">
                                 <option value="" disabled selected>{{__('admin.select_student')}}</option>
                                 @foreach($students as $student)
                                 <option value="{{ $student->id }}">{{ $student->first_name.' '. $student->last_name; }}</option>
@@ -72,7 +73,7 @@
                         </div>
 
                         <div class="col-md-12">
-                          <h4>Items</h4>
+                          <h4>{{__('admin.books')}}</h4>
                           <div class="">
                             <table class="table table-striped table-bordered no-print text-center">
                               <thead class="bg-primary">
@@ -85,29 +86,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                
-                                {{-- <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td><input type="text" class="form-control"></td>
-                                  <td><i class="fas fa-times text-danger"></i></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>Larry</td>
-                                  <td>the Bird</td>
-                                  <td><input type="text" class="form-control"></td>
-                                  <td><i class="fas fa-times text-danger"></i></td>
-                                </tr> --}}
                               </tbody>
-                              {{-- <tfoot>
-                                <tr>
-                                  <td colspan="3">Total items</td>
-                                  <td>$180</td>
-                                </tr>
-                                
-                              </tfoot> --}}
                             </table>
                           </div>
                         </div>
@@ -120,9 +99,7 @@
                                 </h3>
                               </div>
                                <textarea id="summernote" name="description"></textarea>
-                              {{-- <div class="card-body">
-                               
-                              </div> --}}
+            
                             </div>
                           </div>
                 
@@ -130,7 +107,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">{{__('admin.submit')}}</button>
                 </div>
               </form>
             </div>
@@ -164,44 +141,33 @@
 
   var britems = JSON.parse(localStorage.getItem("britems")) || {};
 
-
-  // Define the unique key and object to store
-// const newKey = "2503da23d635ce491564f6c98551b5be7d463733";
-// const newValue = {
-//   id: "2503da23d635ce491564f6c98551b5be7d463733"
-// };
-
-// // Retrieve existing data from localStorage or initialize an empty object
-// let storageData = JSON.parse(localStorage.getItem("myStorageKey")) || {};
-
-// // Add the new key-value pair
-// storageData[newKey] = newValue;
-
-// // Save the updated object back to localStorage
-// localStorage.setItem("myStorageKey", JSON.stringify(storageData));
-
-// console.log("Data saved:", storageData);
+  var bstudent = JSON.parse(localStorage.getItem("bstudent")) || {}; 
 
 $(document).ready(function () {
-
-  
     // If there is any item in localStorage
     if (localStorage.getItem("britems")) {
         loadItems();
     }
 
+    $("#bstudent").change(function() {
+      let student_id = $(this).val();
+      $("#sselected").val(student_id);
+       localStorage.setItem('bstudent', JSON.stringify(student_id));
+    });
+
     function loadItems() {
         if (localStorage.getItem("britems")) {
             // britems = JSON.parse(localStorage.getItem("britems"));
-
             var tr_html = "";
             let i = 1;
             $.each(britems, function (index, data) {
               tr_html += `<tr id="row_${index}" class="row_${index}" data-item-id="${index}">
                         <th scope="row">${i}</th>
+                        <input type="hidden" value="${data.row.id}" name="book_id[]" id="book_id">
+                        <input type="hidden" value="${data.row.code}" name="book_code[]" id="book_code[]">
                         <td>${data.row.code}</td>
-                        <td>${data.row.title}</td>
-                        <td><input type="text" class="form-control text-center rquantity" value="${data.row.qty}" data-id="${index}" data-item="${index}" id="quantity_${index}" onclick="this.select()">
+                        <td>${data.row.title} <input type="hidden" value="${data.row.title}" name="book_name[]" id></td>
+                        <td><input type="text" name="quantity[]" class="form-control text-center rquantity" value="${data.row.qty}" data-id="${index}" data-item="${index}" id="quantity_${index}" onclick="this.select()">
                           </td>
                         <td><span class="brdel" style="cursor:pointer;"><i class="fas fa-times text-danger"></i></span></td>
                       </tr>`;
