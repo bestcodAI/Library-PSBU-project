@@ -37,33 +37,19 @@
                 @csrf
                 @method('POST')
                 <input type="hidden" name="form_type" value="1">
-                <div class="card-body">
+                <div class="card-body no-print">
                     <div class="container">
-                      <div class="form-group no-print">
+                      <div class="form-group">
                                 <label for="slug">{{__('admin.title')}}</label>
                                 <input type="text" name="book_name" class="form-control" id="add_book" placeholder="{{__('admin.enter_title')}}" aria-describedby="books" autofocus>
-                            </div>
-                    
-                        <table class="table table-bordered no-print">
+                      </div>
+                        <table class="table table-bordered no-print text-center">
                             <thead class="bg-primary">
-                              <th>Books Name(Book barcode)</th>
+                              <th>Books Name (Book barcode)</th>
                               <th>Quantity</th>
-                              <th>Variant</th>
                               <th width="20px"><i class="fas fa-trash"></i></th>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>Book 1(829929292)</td>
-                                <td class="col-2"><input type="text" class="form-control text-center" value="2"></td>
-                                <td class="col-4">testing</td>
-                                <td><a href="#" class="text-danger" title="Remove"><i class="fas fa-times"></i></a></td>
-                              </tr>
-                               <tr>
-                                <td>Book 2</td>
-                                <td class="col-2"><input type="text" class="form-control text-center" value="2"></td>
-                                <td class="col-4">testing</td>
-                                <td> <a href="#" class="text-danger" title="Remove"><i class="fas fa-times"></i></a></td>
-                              </tr>
                             </tbody>
                         </table>
                     
@@ -72,144 +58,30 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary no-print">Submit</button>
+                  <button type="submit" class="btn btn-primary no-print">{{__('admin.update')}}</button>
+                  <button type="button" class="btn btn-danger no-print" id="reset_item">{{__('admin.reset')}}</button>
                 </div>
               </form>
               {{-- barcode block --}}
                 <div class="container">
+                  @if($barcodes) 
                   <button type="button" class="btn btn-primary btn-block mb-2 no-print" onclick="window.print(); return false;">Print</button>
                         <div class="container">
                           <div class="row m-1">
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                
-                                <img style="width: 130px;" src="data:image/png;base64,{!! DNS1D::getBarcodePNG("PSBU-0001", "C128",1.5) !!}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0002', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0002</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0001', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0001</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0002', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0002</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0003', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0003</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0004', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0004</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                               
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0005', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0005</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0006', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0006</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0007', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0007</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0008', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0008</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0009', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0009</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0010', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0010</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0011', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0011</span>
-                            </div>
-                            <div class="border text-center p-2 rounded m-1">
-                                <span>Khmer history book</span><br>
-                                <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('PSBU-0012', 'C128',0.90,22) }}" alt="barcode" /><br>
-                                <span>PSBU-0012</span>
-                            </div>
+                            @foreach($barcodes as $barcode)
+                                 @for($i = 0; $i < $barcode['quantity']; $i++)
+                                    <div style="border: 1px dotted gray;" class="text-center p-2 rounded m-1">
+                                        <span>{{ $barcode['book_name']; }}</span><br>
+                                        <img style="width: 130px;" src="data:image/png;base64,{!! DNS1D::getBarcodePNG($barcode["barcode"], "C128",1.5) !!}" alt="barcode" /><br>
+                                        <span>{{ $barcode['barcode']; }}</span>
+                                    </div>
+                                  @endfor
+                            @endforeach
+                        </div>
                       </div>
-                    </div>
+                    @endif
                 </div>
+                {{-- end barcode --}}
             </div>
             <!-- /.card -->
             </div>
@@ -239,35 +111,22 @@
 
 <script>
   var count = 1;
-
   var bitems = JSON.parse(localStorage.getItem("bitems")) || {};
-
-  var bstudent = JSON.parse(localStorage.getItem("bstudent")) || {}; 
-
 $(document).ready(function () {
     // If there is any item in localStorage
-    // if (localStorage.getItem("bitems")) {
-    //     loadItems();
-    // }
-
-    // $("#bstudent").change(function() {
-    //   let student_id = $(this).val();
-    //   $("#sselected").val(student_id);
-    //    localStorage.setItem('bstudent', JSON.stringify(student_id));
-    // });
+    if (localStorage.getItem("bitems")) {
+        loadItems();
+    }
 
     function loadItems() {
-        if (localStorage.getItem("britems")) {
-            
+        if (localStorage.getItem("bitems")) {
             var tr_html = "";
             let i = 1;
-            $.each(britems, function (index, data) {
+            $.each(bitems, function (index, data) {
               tr_html += `<tr id="row_${index}" class="row_${index}" data-item-id="${index}">
-                        <th scope="row">${i}</th>
                         <input type="hidden" value="${data.row.id}" name="book_id[]" id="book_id">
                         <input type="hidden" value="${data.row.code}" name="book_code[]" id="book_code[]">
-                        <td>${data.row.code}</td>
-                        <td>${data.row.title} <input type="hidden" value="${data.row.title}" name="book_name[]" id></td>
+                        <td>${data.row.title} (${data.row.code})</td>
                         <td><input type="text" name="quantity[]" class="form-control text-center rquantity" value="${data.row.qty}" data-id="${index}" data-item="${index}" id="quantity_${index}" onclick="this.select()">
                           </td>
                         <td><span class="brdel" style="cursor:pointer;"><i class="fas fa-times text-danger"></i></span></td>
@@ -288,16 +147,11 @@ $(document).ready(function () {
         .on('change', '.rquantity', function () {
             var row = $(this).closest('tr');
             var item_id = row.attr('data-item-id');
-            // if (!is_numeric($(this).val())) {
-            //     // $(this).val(old_row_qty);
-            //     alert('unexpected_value');
-            //     // bootbox.alert(lang.unexpected_value);
-            //     return;
-            // }
+            
             var new_qty = parseFloat($(this).val()),
                 item_id = row.attr('data-item-id');
-            britems[item_id].row.qty = new_qty;
-            localStorage.setItem('britems', JSON.stringify(britems));
+            bitems[item_id].row.qty = new_qty;
+            localStorage.setItem('bitems', JSON.stringify(bitems));
             loadItems();
         });
 
@@ -308,12 +162,12 @@ $(document).ready(function () {
     $(document).on("click", ".brdel", function () {
         var row = $(this).closest("tr");
         var item_id = row.attr("data-item-id");
-        delete britems[item_id];
-        localStorage.setItem("bitems", JSON.stringify(britems));
+        delete bitems[item_id];
+        localStorage.setItem("bitems", JSON.stringify(bitems));
         row.remove();
         if (britems.hasOwnProperty(item_id)) {
         } else {
-            localStorage.setItem('bitems', JSON.stringify(britems));
+            localStorage.setItem('bitems', JSON.stringify(bitems));
             loadItems();
             return;
         }
@@ -369,39 +223,23 @@ $(document).ready(function () {
 
     // add item to local storage
     function add_book(item) {
+        if (item == null) return;
 
-      alert(JSON.stringify(item));
+        var site = {"settings" : 0};
 
-        // if (count == 1) {
-        //     if ($('#bstudent').val()) {
-        //       $("#bstudent").prop("disabled", true);
-        //     } else {
+        var item_id = site.settings == 1 ? item.item_id : item.id;
+        if (bitems[item_id]) {
+            var new_qty = parseFloat(bitems[item_id].row.qty) + 1;
+            // britems[item_id].row.base_quantity = new_qty;
+            bitems[item_id].row.qty = new_qty;
+        } else {
+            bitems[item_id] = item;
+        }
 
-        //       alert('select_student_above');
-        //         // bootbox.alert(lang.select_above);
-        //         item = null;
-        //         return;
-        //     }
-        // }
+        bitems[item_id].order = new Date().getTime();
 
-        // if (item == null) return;
-
-        // var site = {"settings" : 0};
-
-        // var item_id = site.settings == 1 ? item.item_id : item.id;
-  
-        // if (bitems[item_id]) {
-        //     var new_qty = parseFloat(bitems[item_id].row.qty) + 1;
-        //     // britems[item_id].row.base_quantity = new_qty;
-        //     bitems[item_id].row.qty = new_qty;
-        // } else {
-        //     bitems[item_id] = item;
-        // }
-
-        // bitems[item_id].order = new Date().getTime();
-
-        // localStorage.setItem('bitems', JSON.stringify(bitems));
-        // loadItems();
+        localStorage.setItem('bitems', JSON.stringify(bitems));
+        loadItems();
         return true;
     }
 

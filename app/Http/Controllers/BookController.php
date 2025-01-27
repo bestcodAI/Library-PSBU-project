@@ -206,28 +206,26 @@ class BookController extends Controller
 
     public function print_barcodes(Request $request)
     {
+        $barcodes = [];
+        if($request->form_type) {
+          $s = $request->book_id ? sizeof($request->book_id) : 0;
 
-        if(!empty($request->form_type)) {
-            dd($request);
+          for($m = 0; $m < $s; $m++) {
+            $bid =  $request->input('book_id')[$m];
+            $quantity =  $request->input('quantity')[$m];
+
+            $book = DB::table('books')->where('id', $bid)->first();  
+
+            $barcodes[] = [
+                'book_id' => $book->id,
+                'barcode' =>  $book->code,
+                'book_name' => $book->title,
+                'quantity' => $quantity,
+            ];
+          }
         }
-
-        $books =  DB::table('books')->select('title','code')->get();
-
-        
-
-        return view('books.barcodes',['books' => $books]);
+        return view('books.barcodes',['barcodes' => $barcodes]);
     }
-
-    // public function filters($filters) {
-
-    //     $filter =  DB::table('books')
-    //     ->where('code','LIKE','%'.$filters.'%')
-    //     ->orWhere('title','LIKE','%'.$filters.'%')
-    //     ->select('id','title','code')
-    //     ->get();
-
-    //     return response()->json(['filter' => $filter]);
-    // }
 
     public function import()
     {
