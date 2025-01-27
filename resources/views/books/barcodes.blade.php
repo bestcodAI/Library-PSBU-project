@@ -112,6 +112,8 @@
 <script>
   var count = 1;
   var bitems = JSON.parse(localStorage.getItem("bitems")) || {};
+
+  
 $(document).ready(function () {
     // If there is any item in localStorage
     if (localStorage.getItem("bitems")) {
@@ -119,6 +121,7 @@ $(document).ready(function () {
     }
 
     function loadItems() {
+
         if (localStorage.getItem("bitems")) {
             var tr_html = "";
             let i = 1;
@@ -171,6 +174,18 @@ $(document).ready(function () {
             loadItems();
             return;
         }
+    });
+
+
+    // reset localh storage
+    $(document).on("click", "#reset_item", function () {
+
+      alert('Do you delete clear item?');
+      if(localStorage.getItem('bitems')) {
+        localStorage.removeItem('bitems');
+        loadItems();
+        window.location.reload(true);
+      } 
     });
 
     $("#add_book").autocomplete({

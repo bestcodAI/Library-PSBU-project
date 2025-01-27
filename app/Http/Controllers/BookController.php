@@ -45,17 +45,16 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $valid = $request->validate([
-            'code' => 'required',
             'title' => 'required',
-            'slug' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
         ]);
 
+        $reference =  reference_no('book', 12);
         $data =  [
-            'code' => $request->code,
+            'code' => $reference,
             'title' => $request->title,
-            'slug' => $request->slug,
+            'slug' => str_replace(' ', '_', $request->title),
             'author' => $request->author_name,
             'author_date' => $request->author_date,
             'category_lang_id' => $request->category_lang_id,
@@ -74,7 +73,7 @@ class BookController extends Controller
 
         DB::table('books')->insert($data);
 
-        return admin_redirect('group_book/books')->with('success', 'book added');
+        return admin_redirect('group_book/books')->with('success', __('admin.book_added'));
     }
 
     /**

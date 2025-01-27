@@ -38,10 +38,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="code">{{__('admin.code')}}</label>
-                                <input type="text" name="code" class="form-control" id="code"  placeholder="{{__('admin.enter_book_code')}}">
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="name">{{__('admin.title')}}</label>
                                 <input type="text" name="title" class="form-control" id="title" placeholder="{{__('admin.enter_book_title')}}">
@@ -56,10 +53,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="slug">{{__('admin.slug')}}</label>
-                                <input type="text" name="slug" class="form-control" id="slug" placeholder="{{__('admin.enter_book_slug')}}">
-                            </div>
                             
                             <div class="form-group">
                                 <label>{{__('admin.category')}}</label>
