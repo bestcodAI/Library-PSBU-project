@@ -97,6 +97,7 @@ Route::middleware('auth','admin')->group(function () {
             Route::get('/import', [BookController::class, 'import']);
             Route::get('/import', [BookController::class, 'import']);
             Route::get('/filters/{val}', [BookController::class, 'filters']);
+            Route::get('/get_book_data/{val}', [BookController::class, 'get_book_data']);
         });
 
         // borrower book

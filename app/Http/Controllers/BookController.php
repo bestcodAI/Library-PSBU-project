@@ -89,6 +89,33 @@ class BookController extends Controller
        return response()->json($book);
     }
 
+    // get data
+    public function get_book_data($term) {
+
+        $b = [];
+        $rows = DB::table('books')
+        ->where('code', 'LIKE', "%{$term}%") 
+        ->orWhere('title', 'LIKE', "%{$term}%")
+        ->get();
+
+        if(!empty($rows)) {
+            $r = 0;
+            foreach($rows as $row) {
+                unset($row->created_by, $row->created_at, $row->updated_at, $row->details, $row->slug, $row->views, $row->author, $row->author_date,$row->category_lang_id,$row->category_id);
+                $c = uniqid(mt_rand(), true);
+                $row->qty = 1; 
+                $b[] = ['id' => sha1($c . $r), 'item_id' => $row->id,'label' => $row->title . ' (' . $row->code . ')', 'row' => $row];
+                $r++;
+            }
+        } 
+
+        if($b) { 
+            return response()->json($b);
+           }else {
+            return response()->json([['id' => 0, 'label' => __('no_match_found')]]);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -191,16 +218,16 @@ class BookController extends Controller
         return view('books.barcodes',['books' => $books]);
     }
 
-    public function filters($filters) {
+    // public function filters($filters) {
 
-        $filter =  DB::table('books')
-        ->where('code','LIKE','%'.$filters.'%')
-        ->orWhere('title','LIKE','%'.$filters.'%')
-        ->select('id','title','code')
-        ->get();
+    //     $filter =  DB::table('books')
+    //     ->where('code','LIKE','%'.$filters.'%')
+    //     ->orWhere('title','LIKE','%'.$filters.'%')
+    //     ->select('id','title','code')
+    //     ->get();
 
-        return response()->json(['filter' => $filter]);
-    }
+    //     return response()->json(['filter' => $filter]);
+    // }
 
     public function import()
     {
