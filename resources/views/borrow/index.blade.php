@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
+
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -16,10 +15,8 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -29,7 +26,6 @@
                 <h3 class="card-title">DataTable with minimal features & hover style</h3>
                 <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('borrowers/create') }}">{{__('admin.add_borrower')}}</a>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-hover text-center">
                   <thead>
@@ -38,10 +34,8 @@
                     <th>{{__('admin.borrow_date')}}</th>
                     <th>{{__('admin.repayment_date')}}</th>
                     <th>{{__('admin.status')}}</th>
-                    {{-- <th>{{__('admin.created')}}</th> --}}
                     <th>{{__('admin.action')}}</th>
                   </tr>
-                  
                   </thead>
                   <tbody>
                     @foreach($borrowings as $borrowing)
@@ -51,31 +45,25 @@
                     <td>{{ $borrowing->end_date }}</td>
                     <td>{!! checkStatus($borrowing->status) !!}</td>
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $borrowing->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></button>
+                      <form action="{{ admin_url('borrowers/'. $borrowing->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ admin_url('borrowers/'. $borrowing->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-sync"></i></a>
+                        <a href="#" class="btn btn-info btn-sm view-modal" data-id="{{ $borrowing->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></a>
                         <a href="{{ admin_url('borrowers/'. $borrowing->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                        <form  action="{{ admin_url('borrowers/'. $borrowing->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                   </tr>
                   @endforeach
-                  
                   </tfoot>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
-      <!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
   </div>
 
 @if (session('remove_br')) 
@@ -93,7 +81,7 @@
 
 <script>
 
-    var site =  {url: "<?= admin_url('borrowers/') ?>" , asset: "<?= asset('uploads/student/') ?>" }
+    var site =  {url: "<?= admin_url('borrowers/') ?>" , asset: "<?= asset('uploads/student/') ?>" };
 
     function htmlEntities(str) {
         return String(str).replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"');
@@ -105,8 +93,6 @@
         var html = '';
 
         $(".modal-title").text('{{__("admin.student_details")}}');
-
-        // alert(site.url);
 
         $.ajax({
             url: site.url + '/' + id,
@@ -169,6 +155,5 @@
 });
   </script>
 
-  
   @include('components.modal-lg')
 @stop

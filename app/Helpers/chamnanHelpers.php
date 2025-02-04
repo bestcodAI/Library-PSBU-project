@@ -2,9 +2,6 @@
 
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\DB;
-
-
 /**
  * Write code on Method
  *
@@ -153,7 +150,7 @@ if(!function_exists('checkCreditCard')) {
     }
 }
 
-/***
+/*
  * Method admin url()
  */
 

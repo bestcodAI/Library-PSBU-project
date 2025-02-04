@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -16,22 +14,16 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
           <div class="col-md-12">
-            <!-- jquery validation -->
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">{{__('admin.in_required')}}</h3>
               </div>
-              <!-- /.card-header -->
-              <!-- form start -->
               <form id="quickForm" action="{{ admin_url('peoples/students/'. $student->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -119,42 +111,25 @@
                                   {{__('admin.description')}}
                                 </h3>
                               </div>
-                              <!-- /.card-header -->
+                             
                               <div class="card-body">
                                 <textarea id="summernote" name="description">{{ decode_html($student->description)}}</textarea>
                               </div>
                             </div>
                           </div>
-                          <!-- /.col-->
                     </div>
                 </div>
-                <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">{{__('admin.submit')}}</button>
                 </div>
               </form>
             </div>
-            <!-- /.card -->
             </div>
-          <!--/.col (left) -->
-          <!-- right column -->
-          <div class="col-md-6">
-
-          </div>
-          <!--/.col (right) -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
   </aside>
-  <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
 @stop

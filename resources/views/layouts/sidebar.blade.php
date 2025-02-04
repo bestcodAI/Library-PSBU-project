@@ -1,16 +1,10 @@
-<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    
     <a href="{{ admin_url('/') }}" class="brand-link">
       <img src="{{ asset('uploads/settings/'. settings()->logo) }}" alt="{{ settings()->site_name }}" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text fw-bold">{{ settings()->site_name }}</span>
-      <!-- font-weight-light -->
     </a>
-
-    <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar Menu -->
+     
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
@@ -18,11 +12,9 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 {{__('admin.dashboard')}}
-                <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
           </li>
-          {{-- product --}}
           
           {{ config('is_ecommerce') }}
 
@@ -34,7 +26,6 @@
               <p>
                 {{__('admin.products')}}
                 <i class="fas fa-angle-left right"></i>
-                <!-- <span class="badge badge-info right">6</span> -->
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -69,7 +60,7 @@
           {{-- Books --}}
           <li class="nav-item {{ request()->is('admin/group_book*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('admin/group_book*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-book"></i>
               <p>
                 {{__('admin.books')}}
                 <i class="fas fa-angle-left right"></i>
@@ -284,7 +275,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ admin_url('settings') }}" class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}">
-                  <i class="fa fa-cog nav-icon"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>{{__('admin.system_settings')}}</p>
                 </a>
               </li>
@@ -310,7 +301,7 @@
           </li>
           <li class="nav-item {{ request()->is('admin/reports*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
+              <i class="nav-icon fas fa-file"></i>
               <p>
                 {{__('admin.report')}}
                 <i class="fas fa-angle-left right"></i>

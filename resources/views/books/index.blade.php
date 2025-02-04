@@ -30,19 +30,19 @@
                 <a class="btn btn-primary btn-sm" style="float: right" href="{{ admin_url('group_book/books/create') }}">{{__('admin.add_book')}}</a>
               </div>
               <!-- /.card-header -->
+              <div class="table-responsive">
               <div class="card-body">
                 <table id="book-table" class="table table-bordered table-hover">
                   <thead>
-                  <tr>
-                    <th>{{ __('admin.image') }}</th>
-                    <th>{{ __('admin.code') }}</th>
-                    <th>{{ __('admin.title') }}</th>
-                    <th>{{ __('admin.slug') }}</th>
-                    <th>{{ __('admin.category') }}</th>
-                    <th>{{ __('admin.category_language') }}</th>
-                    <th>{{ __('admin.action') }}</th>
-                  </tr>
-                  
+                    <tr>
+                      <th>{{ __('admin.image') }}</th>
+                      <th>{{ __('admin.code') }}</th>
+                      <th>{{ __('admin.title') }}</th>
+                      <th>{{ __('admin.slug') }}</th>
+                      <th>{{ __('admin.category') }}</th>
+                      <th>{{ __('admin.category_language') }}</th>
+                      <th>{{ __('admin.action') }}</th>
+                    </tr>
                   </thead>
                   <tbody>
                     @foreach($books as $book)
@@ -54,19 +54,20 @@
                     <td>{{ $book->category_name }}</td>
                     <td>{{ $book->cate_lang_name }}</td>
                     <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $book->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></button>
-                        <a href="{{ admin_url('group_book/books/'. $book->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                        
                         <form  action="{{ admin_url('group_book/books/'. $book->id) }}" method="post">
                             @csrf
                             @method('DELETE')
+                            <a href="#" class="btn btn-info btn-sm view-modal" data-id="{{ $book->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></a>
+                            <a href="{{ admin_url('group_book/books/'. $book->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                   </tr>
                   @endforeach
-                  
                   </tfoot>
                 </table>
+              </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -128,17 +129,15 @@
                           <td>${data.code}</td>
                         </tr>
                         <tr>
-                          <td>{{__('admin.first_name')}}</td>
-                          <td>${data.first_name}</td>
+                          <td>{{__('admin.title')}}</td>
+                          <td>${data.title}</td>
                         </tr>
                         <tr>
-                          <td>{{__('admin.last_name')}}</td>
-                          <td>${data.last_name}</td>
+                          <td>{{__('admin.author')}}</td>
+                          <td>${data.author}</td>
                         </tr>
-                        ${(data.nick_name)  ? '<tr><td>{{__('admin.nick_name')}}</td><td>' + data.nick_name + '</td></tr>' : '' }
-                        ${(data.gender)  ? '<tr><td>{{__('admin.gender')}}</td><td>' + data.gender +'</td></tr>' : '' }
-                        ${(data.dob)  ? '<tr><td>{{__('admin.dob')}}</td><td>' + data.dob + '</td></tr>' : '' }
-                        ${(data.pob)  ? '<tr><td>{{__('admin.pob')}}</td><td>' + data.pob + '</td></tr>' : '' }
+                        ${(data.author_date)  ? '<tr><td>{{__('admin.author_date')}}</td><td>' + data.author_date + '</td></tr>' : '' }
+                        
                       </tbody>
                     </table>
                   </div>

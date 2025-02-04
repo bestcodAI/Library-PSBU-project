@@ -50,7 +50,7 @@ class BookController extends Controller
 
         ]);
 
-        $reference =  reference_no('book', 12);
+        $reference =  reference_no('book', 8);
         $data =  [
             'code' => $reference,
             'title' => $request->title,

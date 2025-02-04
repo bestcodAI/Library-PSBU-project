@@ -44,22 +44,30 @@
                   </thead>
                   <tbody>
                     @foreach($users as $user)
-                  <tr class="text-center">
-                    <td><img width="50px" src="{{ $user->avatar ? asset('uploads/profile/'. $user->avatar) : asset('images/no_image.png');  }}"></td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->phone }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->skills }}</td>
-                    <td>
-                        <button class="btn btn-info btn-sm view-modal" data-id="{{ $user->id  }}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></button>
+                    <tr class="text-center">
+                      <td><img width="50px" src="{{ $user->avatar ? asset('uploads/profile/'. $user->avatar) : asset('images/no_image.png');  }}"></td>
+                      <td>{{ $user->name; }}</td>
+                      <td>{{ $user->phone; }}</td>
+                      <td>{{ $user->email; }}</td>
+                      <td>{{ $user->skills; }}</td>
+                      <td style="width: 170px;">
+                          {{-- <form  action="{{ admin_url('peoples/users/'. $user->id) }}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <a href="#" class="btn btn-info btn-sm view-modal" data-id="{{ $user->id  }}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></a>
+                              <a href="{{ admin_url('peoples/users/'. $user->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                              <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                          </form> --}}
+                          <form action="{{ admin_url('peoples/users/'. $user->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ admin_url('peoples/users/'. $user->id.'/edit') }}" class="btn btn-success btn-sm"><i class="fas fa-sync"></i></a>
+                        <a href="#" class="btn btn-info btn-sm view-modal" data-id="{{ $user->id}}" data-toggle="modal" data-target="#modal-lg"><i class="fas fa-eye"></i></a>
                         <a href="{{ admin_url('peoples/users/'. $user->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                        <form  action="{{ admin_url('peoples/users/'. $user->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                         </form>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
                   @endforeach
                   </tfoot>
                 </table>
